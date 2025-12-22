@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { QuickStart } from "@/components/quick-start";
 
 // 블로그 카드 데이터
 const blogCards = [
@@ -133,34 +134,7 @@ export default function Home() {
       </section>
 
       {/* Quick Start Section */}
-      <section className="py-8 md:py-12 bg-muted/30 rounded-2xl mt-8 px-6">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">빠른 시작</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-          <Card className="text-center p-6">
-            <div className="text-3xl mb-3">1</div>
-            <CardTitle className="text-lg mb-2">Next.js 설치</CardTitle>
-            <code className="text-xs bg-muted px-2 py-1 rounded">npx create-next-app@latest .</code>
-          </Card>
-
-          <Card className="text-center p-6">
-            <div className="text-3xl mb-3">2</div>
-            <CardTitle className="text-lg mb-2">Claude Code 초기화</CardTitle>
-            <code className="text-xs bg-muted px-2 py-1 rounded">/init</code>
-          </Card>
-
-          <Card className="text-center p-6">
-            <div className="text-3xl mb-3">3</div>
-            <CardTitle className="text-lg mb-2">shadcn/ui 설정</CardTitle>
-            <code className="text-xs bg-muted px-2 py-1 rounded">npx shadcn@latest init</code>
-          </Card>
-
-          <Card className="text-center p-6">
-            <div className="text-3xl mb-3">4</div>
-            <CardTitle className="text-lg mb-2">개발 서버 실행</CardTitle>
-            <code className="text-xs bg-muted px-2 py-1 rounded">npm run dev</code>
-          </Card>
-        </div>
-      </section>
+      <QuickStart />
 
       {/* Tech Stack Section */}
       <section className="py-8 md:py-12 mt-8">
