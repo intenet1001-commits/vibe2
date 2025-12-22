@@ -10,7 +10,7 @@ const blogCards = [
     title: "개발 환경 설치 가이드",
     description: "Node.js, npm, Git, Claude Code 완벽 설치 및 GitHub/Vercel/Supabase 연동",
     icon: "🛠️",
-    tags: ["Node.js", "npm", "Git", "Claude Code", "GitHub", "Vercel", "Supabase"],
+    tags: ["Homebrew", "Node.js", "Git", "Claude Code", "GitHub", "Vercel", "Supabase"],
     href: "/setup-guide",
     color: "from-blue-500 to-cyan-500",
   },
