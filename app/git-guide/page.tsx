@@ -503,6 +503,53 @@ export default function GitGuide() {
               </div>
             </CardContent>
           </Card>
+          {/* Team Collaboration */}
+          <Card>
+            <CardHeader>
+              <CardTitle>팀 협업 워크플로우</CardTitle>
+              <CardDescription>Pull Request를 활용한 협업 방식</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="bg-muted p-4 rounded-lg">
+                <h4 className="font-semibold mb-3">Step 1: Fork & Clone</h4>
+                <p className="text-xs text-muted-foreground mb-2">GitHub에서 원본 저장소를 Fork한 후 Clone</p>
+                <CodeBlockMultiLine lines={[
+                  "git clone https://github.com/myname/project.git",
+                  "cd project",
+                  "git remote add upstream https://github.com/original/project.git"
+                ]} />
+              </div>
+
+              <div className="bg-muted p-4 rounded-lg">
+                <h4 className="font-semibold mb-3">Step 2: 기능 개발</h4>
+                <CodeBlockMultiLine lines={[
+                  "git checkout -b feature/my-feature",
+                  "git add .",
+                  "git commit -m \"새 기능 추가\"",
+                  "git push origin feature/my-feature"
+                ]} />
+              </div>
+
+              <div className="bg-muted p-4 rounded-lg">
+                <h4 className="font-semibold mb-3">Step 3: Pull Request 생성</h4>
+                <ul className="list-disc list-inside space-y-2 text-sm">
+                  <li>GitHub에서 &quot;Pull Request&quot; 버튼 클릭</li>
+                  <li>변경사항 설명 작성</li>
+                  <li>코드 리뷰 요청</li>
+                </ul>
+              </div>
+
+              <div className="bg-muted p-4 rounded-lg">
+                <h4 className="font-semibold mb-3">Step 4: 원본 저장소 동기화</h4>
+                <CodeBlockMultiLine lines={[
+                  "git fetch upstream",
+                  "git checkout main",
+                  "git merge upstream/main",
+                  "git push origin main"
+                ]} />
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
