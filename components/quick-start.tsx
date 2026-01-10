@@ -88,33 +88,66 @@ function NextjsCard() {
   );
 }
 
+function GitCommitHint() {
+  return (
+    <div className="hidden lg:flex items-center justify-center text-muted-foreground">
+      <div className="flex flex-col items-center gap-1">
+        <span className="text-lg">→</span>
+        <span className="text-[10px] bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded font-mono">git commit</span>
+      </div>
+    </div>
+  );
+}
+
+function StepCard({ item }: { item: typeof quickStartSteps[number] }) {
+  return (
+    <Card className="text-center p-4 md:p-6">
+      <div className="text-2xl md:text-3xl mb-2 md:mb-3">{item.step}</div>
+      <CardTitle className="text-base md:text-lg mb-2">{item.title}</CardTitle>
+      <CardDescription className="text-xs mb-3 min-h-[2.5rem]">{item.desc}</CardDescription>
+      {"code" in item && item.code ? (
+        <div className="space-y-2">
+          <CodeBlock code={item.code} className="text-xs" />
+          {"tipLabel" in item && item.tipLabel && (
+            <p className="text-xs text-muted-foreground pt-1">{item.tipLabel}</p>
+          )}
+          {"tip" in item && item.tip && (
+            <CodeBlock code={item.tip} className="text-xs" />
+          )}
+        </div>
+      ) : "link" in item && item.link ? (
+        <Link href={item.link} className="inline-block bg-primary text-primary-foreground text-xs px-3 py-1.5 rounded hover:bg-primary/90 transition-colors">
+          설치 가이드
+        </Link>
+      ) : null}
+    </Card>
+  );
+}
+
 export function QuickStart() {
+  const otherSteps = quickStartSteps.slice(1);
+
   return (
     <section className="py-8 md:py-12 bg-muted/30 rounded-2xl mt-8 px-6">
       <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">빠른 시작</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+
+      {/* Mobile: 그리드 */}
+      <div className="lg:hidden grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
         <NextjsCard />
-        {quickStartSteps.slice(1).map((item) => (
-          <Card key={item.step} className="text-center p-4 md:p-6">
-            <div className="text-2xl md:text-3xl mb-2 md:mb-3">{item.step}</div>
-            <CardTitle className="text-base md:text-lg mb-2">{item.title}</CardTitle>
-            <CardDescription className="text-xs mb-3 min-h-[2.5rem]">{item.desc}</CardDescription>
-            {"code" in item && item.code ? (
-              <div className="space-y-2">
-                <CodeBlock code={item.code} className="text-xs" />
-                {"tipLabel" in item && item.tipLabel && (
-                  <p className="text-xs text-muted-foreground pt-1">{item.tipLabel}</p>
-                )}
-                {"tip" in item && item.tip && (
-                  <CodeBlock code={item.tip} className="text-xs" />
-                )}
-              </div>
-            ) : "link" in item && item.link ? (
-              <Link href={item.link} className="inline-block bg-primary text-primary-foreground text-xs px-3 py-1.5 rounded hover:bg-primary/90 transition-colors">
-                설치 가이드
-              </Link>
-            ) : null}
-          </Card>
+        {otherSteps.map((item) => (
+          <StepCard key={item.step} item={item} />
+        ))}
+      </div>
+
+      {/* Desktop: git commit 힌트 포함 */}
+      <div className="hidden lg:flex items-start justify-center gap-2 max-w-7xl mx-auto">
+        <NextjsCard />
+        <GitCommitHint />
+        {otherSteps.map((item, index) => (
+          <div key={item.step} className="contents">
+            <StepCard item={item} />
+            {index < otherSteps.length - 1 && <GitCommitHint />}
+          </div>
         ))}
       </div>
     </section>
