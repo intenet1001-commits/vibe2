@@ -7,15 +7,15 @@ import { CodeBlock } from "@/components/ui/code-block";
 const quickStartSteps = [
   {
     step: 1,
-    title: "Next.js 설치",
+    title: "Next.js v15 설치",
     code: "npx create-next-app@latest .",
-    desc: "TypeScript? No, Tailwind CSS? Yes 선택"
+    desc: "TypeScript, Tailwind CSS v4, App Router 모두 Yes"
   },
   {
     step: 2,
     title: "shadcn/ui 설정",
     code: "npx shadcn@latest init",
-    desc: "UI 컴포넌트 라이브러리"
+    desc: "lucide-react 아이콘 자동 포함"
   },
   {
     step: 3,
