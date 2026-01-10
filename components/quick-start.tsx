@@ -5,17 +5,6 @@ import Link from "next/link";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { CodeBlock } from "@/components/ui/code-block";
 
-const nextjsOptions = {
-  new: {
-    label: "새 폴더",
-    code: "npx create-next-app@latest 프로젝트명 --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias"
-  },
-  existing: {
-    label: "현재 폴더",
-    code: "npx create-next-app@latest . --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias"
-  }
-};
-
 const quickStartSteps = [
   {
     step: 1,
@@ -53,6 +42,14 @@ const quickStartSteps = [
 
 function NextjsCard() {
   const [mode, setMode] = useState<"new" | "existing">("new");
+  const [projectName, setProjectName] = useState("my-app");
+
+  const getCode = () => {
+    if (mode === "existing") {
+      return "npx create-next-app@latest . --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias";
+    }
+    return `npx create-next-app@latest ${projectName} --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias`;
+  };
 
   return (
     <Card className="p-4 flex flex-col">
@@ -71,7 +68,7 @@ function NextjsCard() {
               : "bg-muted hover:bg-muted/80"
           }`}
         >
-          {nextjsOptions.new.label}
+          새 폴더
         </button>
         <button
           onClick={() => setMode("existing")}
@@ -81,12 +78,22 @@ function NextjsCard() {
               : "bg-muted hover:bg-muted/80"
           }`}
         >
-          {nextjsOptions.existing.label}
+          현재 폴더
         </button>
       </div>
 
+      {mode === "new" && (
+        <input
+          type="text"
+          value={projectName}
+          onChange={(e) => setProjectName(e.target.value || "my-app")}
+          placeholder="프로젝트명"
+          className="text-[11px] px-2 py-1 mb-2 border rounded bg-background w-full"
+        />
+      )}
+
       <div className="mt-auto">
-        <CodeBlock code={nextjsOptions[mode].code} className="text-[10px]" />
+        <CodeBlock code={getCode()} className="text-[10px]" />
       </div>
     </Card>
   );
