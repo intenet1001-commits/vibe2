@@ -8,8 +8,10 @@ const quickStartSteps = [
   {
     step: 1,
     title: "Next.js v15 설치",
-    code: "npx create-next-app@latest . --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias",
-    desc: "TS, ESLint, Tailwind, src/, App Router, Turbopack: Yes / Alias: No"
+    code: "npx create-next-app@latest 프로젝트명 --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias",
+    desc: "새 폴더 생성 시 (프로젝트명 입력)",
+    tipLabel: "💡 기존 폴더에 설치 시",
+    tip: "npx create-next-app@latest . --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias"
   },
   {
     step: 2,
