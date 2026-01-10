@@ -3,41 +3,40 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { QuickStart } from "@/components/quick-start";
 
-// 블로그 카드 데이터
 const blogCards = [
   {
     id: "setup-guide",
     title: "개발 환경 설치 가이드",
-    description: "Node.js, npm, Git, Claude Code 완벽 설치 및 GitHub/Vercel/Supabase 연동",
+    description: "Node.js, Git, Claude Code 설치 및 GitHub/Vercel/Supabase 연동",
     icon: "🛠️",
-    tags: ["Homebrew", "Node.js", "Git", "Claude Code", "GitHub", "Vercel", "Supabase"],
+    tags: ["Homebrew", "Node.js", "Git", "Claude Code"],
     href: "/setup-guide",
     color: "from-blue-500 to-cyan-500",
   },
   {
     id: "git-guide",
     title: "Git 완벽 가이드",
-    description: "버전 관리의 기초부터 실전 워크플로우까지 완벽 가이드",
+    description: "버전 관리 기초부터 실전 워크플로우까지",
     icon: "🌿",
-    tags: ["Git", "GitHub", "버전 관리", "협업"],
+    tags: ["Git", "GitHub", "버전 관리"],
     href: "/git-guide",
     color: "from-green-500 to-emerald-500",
   },
   {
     id: "iterm-guide",
     title: "iTerm2 단축키 가이드",
-    description: "생산성을 높이는 터미널 단축키 완벽 가이드",
+    description: "생산성을 높이는 터미널 단축키",
     icon: "⌨️",
-    tags: ["macOS", "iTerm2", "터미널", "단축키"],
+    tags: ["macOS", "iTerm2", "터미널"],
     href: "/iterm-guide",
     color: "from-purple-500 to-pink-500",
   },
   {
     id: "shadcn-demo",
     title: "shadcn/ui 비교 데모",
-    description: "기본 스타일과 shadcn/ui의 차이를 직접 확인해보세요",
+    description: "기본 스타일과 shadcn/ui 차이 비교",
     icon: "🎨",
-    tags: ["shadcn/ui", "UI", "컴포넌트", "디자인 시스템"],
+    tags: ["shadcn/ui", "UI", "컴포넌트"],
     href: "/shadcn-demo",
     color: "from-orange-500 to-red-500",
   },
@@ -45,96 +44,82 @@ const blogCards = [
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-6 md:py-12">
-      {/* Learning Banner */}
-      <Link
-        href="https://linksv1.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block mb-12"
-      >
-        <div className="bg-muted/50 hover:bg-muted border rounded-lg p-4 transition-all hover:scale-[1.01]">
-          <p className="text-center text-sm font-medium">
-            하루에 30분씩 이런 강의 들으면 누구나 할 수 있습니다
-          </p>
-        </div>
-      </Link>
-
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="text-center py-10 md:py-20">
-        <h1 className="text-xl md:text-3xl font-bold mb-4 md:mb-6 px-2">
-          내가 필요한건 내가 만들어 쓰는 시대!<br className="md:hidden" /> 바이브 서비스
-        </h1>
-        <p className="text-lg md:text-2xl text-muted-foreground mb-4 px-2">
-          세련되고 일관성있는 서비스 구축하기
-        </p>
-        <div className="flex gap-2 justify-center flex-wrap mt-4 md:mt-6 px-2">
-          <Badge variant="secondary">Next.js</Badge>
-          <Badge variant="secondary">TypeScript</Badge>
-          <Badge variant="secondary">Tailwind CSS</Badge>
-          <Badge variant="secondary">shadcn/ui</Badge>
-          <Badge variant="secondary">Supabase</Badge>
-        </div>
-      </section>
-
-      {/* Blog Cards Section */}
-      <section className="py-8 md:py-12">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">학습 가이드</h2>
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {blogCards.map((card) => (
-            <Link key={card.id} href={card.href} className="group">
-              <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] border-2 hover:border-primary/50">
-                {/* Gradient Header */}
-                <div className={`h-2 bg-gradient-to-r ${card.color}`} />
-
-                <CardHeader className="pb-3">
-                  <div className="flex items-start gap-3">
-                    <span className="text-4xl">{card.icon}</span>
-                    <div className="flex-1">
-                      <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                        {card.title}
-                      </CardTitle>
-                      <CardDescription className="mt-2 text-sm leading-relaxed">
-                        {card.description}
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="pt-0">
-                  <div className="flex gap-2 flex-wrap">
-                    {card.tags.map((tag) => (
-                      <Badge
-                        key={tag}
-                        variant="outline"
-                        className="text-xs"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  {/* Read More Indicator */}
-                  <div className="mt-4 text-sm text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                    자세히 보기
-                    <svg
-                      className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
+      <section className="py-12 md:py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-2xl md:text-4xl font-bold mb-4 leading-tight">
+            내가 필요한건 내가 만들어 쓰는 시대
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground mb-6">
+            세련되고 일관성있는 서비스 구축하기
+          </p>
+          <div className="flex gap-2 justify-center flex-wrap">
+            <Badge variant="secondary" className="text-xs">Next.js</Badge>
+            <Badge variant="secondary" className="text-xs">TypeScript</Badge>
+            <Badge variant="secondary" className="text-xs">Tailwind CSS</Badge>
+            <Badge variant="secondary" className="text-xs">shadcn/ui</Badge>
+            <Badge variant="secondary" className="text-xs">Supabase</Badge>
+          </div>
         </div>
       </section>
 
       {/* Quick Start Section */}
-      <QuickStart />
+      <div className="px-4">
+        <QuickStart />
+      </div>
+
+      {/* Learning Guide Section */}
+      <section className="py-12 md:py-16 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-xl md:text-2xl font-bold mb-8 text-center">학습 가이드</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {blogCards.map((card) => (
+              <Link key={card.id} href={card.href} className="group">
+                <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/30">
+                  <div className={`h-1 bg-gradient-to-r ${card.color}`} />
+                  <CardHeader className="pb-2 pt-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{card.icon}</span>
+                      <CardTitle className="text-base group-hover:text-primary transition-colors">
+                        {card.title}
+                      </CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="pt-0 pb-4">
+                    <CardDescription className="text-xs mb-3 line-clamp-2">
+                      {card.description}
+                    </CardDescription>
+                    <div className="flex gap-1.5 flex-wrap">
+                      {card.tags.map((tag) => (
+                        <Badge key={tag} variant="outline" className="text-[10px] px-1.5 py-0">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Banner */}
+      <div className="px-4 pb-8">
+        <Link
+          href="https://linksv1.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block max-w-2xl mx-auto"
+        >
+          <div className="bg-muted/50 hover:bg-muted border rounded-lg py-3 px-4 transition-colors text-center">
+            <p className="text-xs text-muted-foreground">
+              하루 30분 강의로 누구나 시작할 수 있습니다 →
+            </p>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }
