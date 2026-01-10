@@ -28,17 +28,17 @@ export function CodeBlock({ code, language, className = "" }: CodeBlockProps) {
       <Button
         variant="ghost"
         size="sm"
-        className="absolute right-2 top-2 h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute right-1 top-1 h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
         onClick={handleCopy}
         title={copied ? "복사됨!" : "복사하기"}
       >
         {copied ? (
-          <Check className="h-4 w-4 text-green-500" />
+          <Check className="h-3 w-3 text-green-500" />
         ) : (
-          <Copy className="h-4 w-4" />
+          <Copy className="h-3 w-3" />
         )}
       </Button>
-      <code className="block bg-muted p-4 rounded text-sm overflow-x-auto whitespace-nowrap">
+      <code className="block bg-muted p-2.5 rounded text-xs overflow-x-auto whitespace-nowrap">
         {code}
       </code>
     </div>

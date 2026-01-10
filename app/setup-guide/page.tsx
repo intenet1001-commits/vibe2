@@ -231,6 +231,26 @@ export default function SetupGuide() {
                   "claude"
                 ]} />
               </div>
+
+              <Separator />
+
+              <div>
+                <h4 className="font-semibold mb-2">💡 터미널 상태 표시줄 설정 (선택)</h4>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Claude Code 실행 중 터미널에 현재 모델, 브랜치 등 유용한 정보를 표시합니다.
+                </p>
+                <CodeBlock code="/statusline" />
+                <div className="bg-muted p-4 rounded-lg mt-3">
+                  <p className="text-xs text-muted-foreground mb-2">설정 후 터미널 표시 예시:</p>
+                  <div className="bg-background rounded p-3 font-mono text-sm">
+                    <span className="text-blue-500">🤖 Opus 4.5</span>
+                    <span className="text-muted-foreground mx-2">|</span>
+                    <span className="text-green-500">🌿 main</span>
+                    <span className="text-muted-foreground mx-2">|</span>
+                    <span className="text-orange-500">📁 ~/my-project</span>
+                  </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
@@ -342,6 +362,26 @@ export default function SetupGuide() {
                   "cd your-project",
                   "claude"
                 ]} />
+              </div>
+
+              <Separator />
+
+              <div>
+                <h4 className="font-semibold mb-2">💡 터미널 상태 표시줄 설정 (선택)</h4>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Claude Code 실행 중 터미널에 현재 모델, 브랜치 등 유용한 정보를 표시합니다.
+                </p>
+                <CodeBlock code="/statusline" />
+                <div className="bg-muted p-4 rounded-lg mt-3">
+                  <p className="text-xs text-muted-foreground mb-2">설정 후 터미널 표시 예시:</p>
+                  <div className="bg-background rounded p-3 font-mono text-sm">
+                    <span className="text-blue-500">🤖 Opus 4.5</span>
+                    <span className="text-muted-foreground mx-2">|</span>
+                    <span className="text-green-500">🌿 main</span>
+                    <span className="text-muted-foreground mx-2">|</span>
+                    <span className="text-orange-500">📁 ~/my-project</span>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>

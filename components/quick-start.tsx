@@ -53,17 +53,17 @@ function NextjsCard() {
   };
 
   return (
-    <Card className="p-4 flex flex-col">
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-lg font-bold text-primary">1</span>
-        <CardTitle className="text-sm">Next.js v15</CardTitle>
+    <Card className="p-3 flex flex-col h-full">
+      <div className="flex items-center gap-2 mb-1">
+        <span className="text-base font-bold text-primary">1</span>
+        <CardTitle className="text-xs">Next.js v15</CardTitle>
       </div>
-      <CardDescription className="text-[11px] mb-3">TS, ESLint, Tailwind, App Router</CardDescription>
+      <CardDescription className="text-[10px] mb-2">TS, ESLint, Tailwind, App Router</CardDescription>
 
-      <div className="flex gap-1 mb-2">
+      <div className="flex gap-1 mb-1.5">
         <button
           onClick={() => setMode("new")}
-          className={`text-[10px] px-2 py-0.5 rounded transition-colors ${
+          className={`text-[9px] px-1.5 py-0.5 rounded transition-colors ${
             mode === "new"
               ? "bg-primary text-primary-foreground"
               : "bg-muted hover:bg-muted/80"
@@ -73,7 +73,7 @@ function NextjsCard() {
         </button>
         <button
           onClick={() => setMode("existing")}
-          className={`text-[10px] px-2 py-0.5 rounded transition-colors ${
+          className={`text-[9px] px-1.5 py-0.5 rounded transition-colors ${
             mode === "existing"
               ? "bg-primary text-primary-foreground"
               : "bg-muted hover:bg-muted/80"
@@ -89,7 +89,7 @@ function NextjsCard() {
           value={projectName}
           onChange={(e) => setProjectName(e.target.value)}
           placeholder="프로젝트명 입력"
-          className="text-[11px] px-2 py-1 mb-2 border rounded bg-background w-full"
+          className="text-[10px] px-2 py-1 mb-1.5 border rounded bg-background w-full"
         />
       )}
 
@@ -102,19 +102,19 @@ function NextjsCard() {
 
 function StepCard({ item }: { item: typeof quickStartSteps[number] }) {
   return (
-    <Card className="p-4 flex flex-col">
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-lg font-bold text-primary">{item.step}</span>
-        <CardTitle className="text-sm">{item.title}</CardTitle>
+    <Card className="p-3 flex flex-col h-full">
+      <div className="flex items-center gap-2 mb-1">
+        <span className="text-base font-bold text-primary">{item.step}</span>
+        <CardTitle className="text-xs">{item.title}</CardTitle>
       </div>
-      <CardDescription className="text-[11px] mb-3">{item.desc}</CardDescription>
+      <CardDescription className="text-[10px] mb-2">{item.desc}</CardDescription>
 
-      <div className="mt-auto space-y-2">
+      <div className="mt-auto space-y-1.5">
         {"code" in item && item.code ? (
           <>
             <CodeBlock code={item.code} className="text-[10px]" />
             {"tipLabel" in item && item.tipLabel && (
-              <p className="text-[10px] text-muted-foreground">{item.tipLabel}</p>
+              <p className="text-[9px] text-muted-foreground">{item.tipLabel}</p>
             )}
             {"tip" in item && item.tip && (
               <CodeBlock code={item.tip} className="text-[10px]" />
@@ -123,7 +123,7 @@ function StepCard({ item }: { item: typeof quickStartSteps[number] }) {
         ) : "link" in item && item.link ? (
           <Link
             href={item.link}
-            className="inline-block bg-primary text-primary-foreground text-[10px] px-3 py-1.5 rounded hover:bg-primary/90 transition-colors"
+            className="inline-block bg-primary text-primary-foreground text-[10px] px-2.5 py-1 rounded hover:bg-primary/90 transition-colors"
           >
             설치 가이드
           </Link>
@@ -147,14 +147,29 @@ export function QuickStart() {
   const otherSteps = quickStartSteps.slice(1);
 
   return (
-    <section className="py-8 md:py-12 bg-muted/30 rounded-xl max-w-6xl mx-auto">
-      <h2 className="text-xl md:text-2xl font-bold mb-6 text-center px-4">빠른 시작</h2>
+    <section className="py-6 md:py-8 bg-muted/30 rounded-xl max-w-5xl mx-auto">
+      <h2 className="text-lg md:text-xl font-bold mb-4 text-center px-4">빠른 시작</h2>
 
-      {/* Mobile & Tablet */}
-      <div className="xl:hidden px-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-3xl mx-auto">
+      {/* Mobile */}
+      <div className="md:hidden px-3">
+        <div className="grid grid-cols-2 gap-2">
           <NextjsCard />
           {otherSteps.map((item) => (
+            <StepCard key={item.step} item={item} />
+          ))}
+        </div>
+      </div>
+
+      {/* Tablet */}
+      <div className="hidden md:block xl:hidden px-4">
+        <div className="grid grid-cols-3 gap-2 max-w-2xl mx-auto">
+          <NextjsCard />
+          {otherSteps.slice(0, 2).map((item) => (
+            <StepCard key={item.step} item={item} />
+          ))}
+        </div>
+        <div className="grid grid-cols-2 gap-2 max-w-md mx-auto mt-2">
+          {otherSteps.slice(2).map((item) => (
             <StepCard key={item.step} item={item} />
           ))}
         </div>
@@ -163,13 +178,13 @@ export function QuickStart() {
       {/* Desktop */}
       <div className="hidden xl:block px-4">
         <div className="flex items-stretch justify-center gap-1">
-          <div className="w-48 flex-shrink-0">
+          <div className="w-44 flex-shrink-0">
             <NextjsCard />
           </div>
           <CommitDot />
           {otherSteps.map((item, index) => (
             <div key={item.step} className="contents">
-              <div className="w-40 flex-shrink-0">
+              <div className="w-36 flex-shrink-0">
                 <StepCard item={item} />
               </div>
               {index < otherSteps.length - 1 && <CommitDot />}
