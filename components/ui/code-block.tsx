@@ -38,7 +38,7 @@ export function CodeBlock({ code, language, className = "" }: CodeBlockProps) {
           <Copy className="h-4 w-4" />
         )}
       </Button>
-      <code className="block bg-muted p-4 rounded text-sm overflow-x-auto whitespace-pre-wrap">
+      <code className="block bg-muted p-4 rounded text-sm overflow-x-auto whitespace-nowrap">
         {code}
       </code>
     </div>
