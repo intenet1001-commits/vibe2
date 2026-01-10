@@ -1,17 +1,27 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { CodeBlock } from "@/components/ui/code-block";
+
+const nextjsOptions = {
+  new: {
+    label: "새 폴더",
+    code: "npx create-next-app@latest 프로젝트명 --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias"
+  },
+  existing: {
+    label: "현재 폴더",
+    code: "npx create-next-app@latest . --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias"
+  }
+};
 
 const quickStartSteps = [
   {
     step: 1,
     title: "Next.js v15 설치",
-    code: "npx create-next-app@latest 프로젝트명 --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias",
-    desc: "새 폴더 생성 시 (프로젝트명 입력)",
-    tipLabel: "💡 기존 폴더에 설치 시",
-    tip: "npx create-next-app@latest . --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias"
+    isNextjs: true,
+    desc: "TS, ESLint, Tailwind, src/, App Router, Turbopack"
   },
   {
     step: 2,
@@ -41,12 +51,50 @@ const quickStartSteps = [
   },
 ];
 
+function NextjsCard() {
+  const [mode, setMode] = useState<"new" | "existing">("new");
+
+  return (
+    <Card className="text-center p-4 md:p-6">
+      <div className="text-2xl md:text-3xl mb-2 md:mb-3">1</div>
+      <CardTitle className="text-base md:text-lg mb-2">Next.js v15 설치</CardTitle>
+      <CardDescription className="text-xs mb-3">TS, ESLint, Tailwind, src/, App Router, Turbopack</CardDescription>
+
+      <div className="flex gap-1 mb-3 justify-center">
+        <button
+          onClick={() => setMode("new")}
+          className={`text-xs px-2 py-1 rounded transition-colors ${
+            mode === "new"
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted hover:bg-muted/80"
+          }`}
+        >
+          {nextjsOptions.new.label}
+        </button>
+        <button
+          onClick={() => setMode("existing")}
+          className={`text-xs px-2 py-1 rounded transition-colors ${
+            mode === "existing"
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted hover:bg-muted/80"
+          }`}
+        >
+          {nextjsOptions.existing.label}
+        </button>
+      </div>
+
+      <CodeBlock code={nextjsOptions[mode].code} className="text-xs" />
+    </Card>
+  );
+}
+
 export function QuickStart() {
   return (
     <section className="py-8 md:py-12 bg-muted/30 rounded-2xl mt-8 px-6">
       <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">빠른 시작</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
-        {quickStartSteps.map((item) => (
+        <NextjsCard />
+        {quickStartSteps.slice(1).map((item) => (
           <Card key={item.step} className="text-center p-4 md:p-6">
             <div className="text-2xl md:text-3xl mb-2 md:mb-3">{item.step}</div>
             <CardTitle className="text-base md:text-lg mb-2">{item.title}</CardTitle>
@@ -61,11 +109,11 @@ export function QuickStart() {
                   <CodeBlock code={item.tip} className="text-xs" />
                 )}
               </div>
-            ) : (
-              <Link href={item.link!} className="inline-block bg-primary text-primary-foreground text-xs px-3 py-1.5 rounded hover:bg-primary/90 transition-colors">
+            ) : "link" in item && item.link ? (
+              <Link href={item.link} className="inline-block bg-primary text-primary-foreground text-xs px-3 py-1.5 rounded hover:bg-primary/90 transition-colors">
                 설치 가이드
               </Link>
-            )}
+            ) : null}
           </Card>
         ))}
       </div>
