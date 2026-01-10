@@ -90,10 +90,11 @@ function NextjsCard() {
 
 function GitCommitHint() {
   return (
-    <div className="hidden lg:flex items-center justify-center text-muted-foreground">
-      <div className="flex flex-col items-center gap-1">
-        <span className="text-lg">→</span>
-        <span className="text-[10px] bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded font-mono">git commit</span>
+    <div className="hidden lg:flex items-center justify-center px-1">
+      <div className="flex flex-col items-center gap-0.5">
+        <div className="w-8 h-px bg-border" />
+        <div className="w-2 h-2 rounded-full border-2 border-muted-foreground/40" />
+        <span className="text-[9px] text-muted-foreground/60 font-medium tracking-tight">commit</span>
       </div>
     </div>
   );
