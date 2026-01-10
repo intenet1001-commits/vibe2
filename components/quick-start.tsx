@@ -42,13 +42,14 @@ const quickStartSteps = [
 
 function NextjsCard() {
   const [mode, setMode] = useState<"new" | "existing">("new");
-  const [projectName, setProjectName] = useState("my-app");
+  const [projectName, setProjectName] = useState("");
 
   const getCode = () => {
     if (mode === "existing") {
       return "npx create-next-app@latest . --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias";
     }
-    return `npx create-next-app@latest ${projectName} --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias`;
+    const name = projectName.trim() || "프로젝트명";
+    return `npx create-next-app@latest ${name} --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias`;
   };
 
   return (
@@ -86,8 +87,8 @@ function NextjsCard() {
         <input
           type="text"
           value={projectName}
-          onChange={(e) => setProjectName(e.target.value || "my-app")}
-          placeholder="프로젝트명"
+          onChange={(e) => setProjectName(e.target.value)}
+          placeholder="프로젝트명 입력"
           className="text-[11px] px-2 py-1 mb-2 border rounded bg-background w-full"
         />
       )}
