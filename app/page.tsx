@@ -135,25 +135,6 @@ export default function Home() {
 
       {/* Quick Start Section */}
       <QuickStart />
-
-      {/* Tech Stack Section */}
-      <section className="py-8 md:py-12 mt-8">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">사용 기술</h2>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
-          {[
-            { name: "Next.js", desc: "React 프레임워크" },
-            { name: "TypeScript", desc: "타입 안전성" },
-            { name: "Tailwind CSS", desc: "유틸리티 CSS" },
-            { name: "shadcn/ui", desc: "UI 컴포넌트" },
-            { name: "Supabase", desc: "백엔드 서비스" },
-          ].map((tech) => (
-            <Card key={tech.name} className="text-center p-4 hover:shadow-md transition-shadow">
-              <CardTitle className="text-sm font-semibold">{tech.name}</CardTitle>
-              <CardDescription className="text-xs mt-1">{tech.desc}</CardDescription>
-            </Card>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
