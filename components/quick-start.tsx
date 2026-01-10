@@ -8,7 +8,7 @@ const quickStartSteps = [
   {
     step: 1,
     title: "Next.js v15 설치",
-    code: "npx create-next-app@latest .",
+    code: "npx create-next-app@latest . --ts --eslint --tailwind --src-dir --app --turbopack --no-import-alias",
     desc: "TS, ESLint, Tailwind, src/, App Router, Turbopack: Yes / Alias: No"
   },
   {
