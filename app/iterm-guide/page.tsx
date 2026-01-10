@@ -6,9 +6,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default function ITermGuidePage() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl">
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">iTerm2 단축키 가이드</h1>
-        <p className="text-xl text-muted-foreground">
+      <div className="mb-10">
+        <h1 className="text-3xl md:text-4xl font-bold mb-3">iTerm2 단축키 가이드</h1>
+        <p className="text-lg md:text-xl text-muted-foreground">
           생산성을 높이는 터미널 단축키 완벽 가이드
         </p>
         <div className="mt-4">

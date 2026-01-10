@@ -48,18 +48,18 @@ export default function Home() {
       {/* Hero Section */}
       <section className="py-8 md:py-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-xl md:text-3xl font-bold mb-3 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
             내가 필요한건 내가 만들어 쓰는 시대
           </h1>
-          <p className="text-sm md:text-base text-muted-foreground mb-4">
+          <p className="text-lg md:text-xl text-muted-foreground mb-6">
             세련되고 일관성있는 서비스 구축하기
           </p>
-          <div className="flex gap-1.5 justify-center flex-wrap">
-            <Badge variant="secondary" className="text-[10px] px-2 py-0.5">Next.js</Badge>
-            <Badge variant="secondary" className="text-[10px] px-2 py-0.5">TypeScript</Badge>
-            <Badge variant="secondary" className="text-[10px] px-2 py-0.5">Tailwind CSS</Badge>
-            <Badge variant="secondary" className="text-[10px] px-2 py-0.5">shadcn/ui</Badge>
-            <Badge variant="secondary" className="text-[10px] px-2 py-0.5">Supabase</Badge>
+          <div className="flex gap-2 justify-center flex-wrap">
+            <Badge variant="secondary">Next.js</Badge>
+            <Badge variant="secondary">TypeScript</Badge>
+            <Badge variant="secondary">Tailwind CSS</Badge>
+            <Badge variant="secondary">shadcn/ui</Badge>
+            <Badge variant="secondary">Supabase</Badge>
           </div>
         </div>
       </section>
@@ -70,29 +70,29 @@ export default function Home() {
       </div>
 
       {/* Learning Guide Section */}
-      <section className="py-8 md:py-10 px-3 md:px-4">
+      <section className="py-10 md:py-12 px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-lg md:text-xl font-bold mb-4 text-center">학습 가이드</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <h2 className="text-2xl font-bold mb-6 text-center">학습 가이드</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {blogCards.map((card) => (
               <Link key={card.id} href={card.href} className="group">
                 <Card className="h-full transition-all duration-200 hover:shadow-md hover:border-primary/30">
-                  <div className={`h-0.5 bg-gradient-to-r ${card.color}`} />
-                  <CardHeader className="pb-1.5 pt-3 px-3">
+                  <div className={`h-1 bg-gradient-to-r ${card.color}`} />
+                  <CardHeader className="pb-2 pt-4 px-4">
                     <div className="flex items-center gap-2">
-                      <span className="text-lg">{card.icon}</span>
-                      <CardTitle className="text-sm group-hover:text-primary transition-colors">
+                      <span className="text-xl">{card.icon}</span>
+                      <CardTitle className="text-base group-hover:text-primary transition-colors">
                         {card.title}
                       </CardTitle>
                     </div>
                   </CardHeader>
-                  <CardContent className="pt-0 pb-3 px-3">
-                    <CardDescription className="text-[11px] mb-2 line-clamp-1">
+                  <CardContent className="pt-0 pb-4 px-4">
+                    <CardDescription className="text-sm mb-3">
                       {card.description}
                     </CardDescription>
-                    <div className="flex gap-1 flex-wrap">
+                    <div className="flex gap-1.5 flex-wrap">
                       {card.tags.map((tag) => (
-                        <Badge key={tag} variant="outline" className="text-[9px] px-1 py-0">
+                        <Badge key={tag} variant="outline" className="text-xs">
                           {tag}
                         </Badge>
                       ))}
@@ -106,15 +106,15 @@ export default function Home() {
       </section>
 
       {/* Footer Banner */}
-      <div className="px-3 md:px-4 pb-6">
+      <div className="px-4 pb-8">
         <Link
           href="https://linksv1.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
           className="block max-w-xl mx-auto"
         >
-          <div className="bg-muted/50 hover:bg-muted border rounded-lg py-2 px-3 transition-colors text-center">
-            <p className="text-[11px] text-muted-foreground">
+          <div className="bg-muted/50 hover:bg-muted border rounded-lg py-3 px-4 transition-colors text-center">
+            <p className="text-sm text-muted-foreground">
               하루 30분 강의로 누구나 시작할 수 있습니다 →
             </p>
           </div>

@@ -8,9 +8,9 @@ export default function SetupGuide() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">
       {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">개발 환경 설치 가이드</h1>
-        <p className="text-xl text-muted-foreground">
+      <div className="text-center mb-10">
+        <h1 className="text-3xl md:text-4xl font-bold mb-3">개발 환경 설치 가이드</h1>
+        <p className="text-lg md:text-xl text-muted-foreground">
           Node.js, npm, Git, Claude Code 완벽 설치 및 GitHub/Vercel/Supabase 연동
         </p>
         <div className="flex gap-2 justify-center flex-wrap mt-6">
@@ -390,7 +390,7 @@ export default function SetupGuide() {
 
       {/* GitHub Integration Section */}
       <section className="mt-12" id="github">
-        <h2 className="text-3xl font-bold mb-6 text-center">GitHub 연동</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">GitHub 연동</h2>
         <p className="text-center text-muted-foreground mb-8">
           Claude Code로 GitHub 리파지토리를 생성하고 관리하기 위한 연동 가이드
         </p>
@@ -455,7 +455,7 @@ export default function SetupGuide() {
 
       {/* Vercel Integration Section */}
       <section className="mt-12" id="vercel">
-        <h2 className="text-3xl font-bold mb-6 text-center">Vercel 연동</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Vercel 연동</h2>
         <p className="text-center text-muted-foreground mb-8">
           프로젝트를 자동으로 배포하기 위한 Vercel 연동 가이드
         </p>
@@ -517,7 +517,7 @@ export default function SetupGuide() {
 
       {/* Supabase Integration */}
       <section className="mt-12" id="supabase">
-        <h2 className="text-3xl font-bold mb-6 text-center">Supabase 연동</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Supabase 연동</h2>
         <p className="text-center text-muted-foreground mb-8">
           백엔드 데이터베이스 및 인증을 위한 Supabase CLI 연동 가이드
         </p>
@@ -572,7 +572,7 @@ export default function SetupGuide() {
 
       {/* CLI Tools Section */}
       <section className="mt-12" id="cli-tools">
-        <h2 className="text-3xl font-bold mb-6 text-center">Claude Code 말고 다른 시리즈도 많아요</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Claude Code 말고 다른 시리즈도 많아요</h2>
         <p className="text-center text-muted-foreground mb-8">
           개발 생산성을 높이는 필수 CLI 도구들
         </p>

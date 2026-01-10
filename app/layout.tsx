@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/nav";
+import { SeniorModeProvider } from "@/components/senior-mode-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,13 +40,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Nav />
-        <main>{children}</main>
-        <footer className="border-t mt-20">
-          <div className="container mx-auto px-4 py-8 text-center text-muted-foreground">
-            © 2025 바이브 서비스. All rights reserved.
-          </div>
-        </footer>
+        <SeniorModeProvider>
+          <Nav />
+          <main>{children}</main>
+          <footer className="border-t mt-20">
+            <div className="container mx-auto px-4 py-8 text-center text-muted-foreground">
+              © 2025 바이브 서비스. All rights reserved.
+            </div>
+          </footer>
+        </SeniorModeProvider>
       </body>
     </html>
   );

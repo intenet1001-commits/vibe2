@@ -7,9 +7,9 @@ export default function GitGuide() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">
       {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Git 완벽 가이드</h1>
-        <p className="text-xl text-muted-foreground mb-6">
+      <div className="text-center mb-10">
+        <h1 className="text-3xl md:text-4xl font-bold mb-3">Git 완벽 가이드</h1>
+        <p className="text-lg md:text-xl text-muted-foreground mb-4">
           버전 관리의 기초부터 실전 워크플로우까지
         </p>
         <div className="flex gap-2 justify-center flex-wrap">
@@ -22,7 +22,7 @@ export default function GitGuide() {
 
       {/* What is Git */}
       <section className="mb-12">
-        <h2 className="text-3xl font-bold mb-6">Git이란?</h2>
+        <h2 className="text-2xl font-bold mb-6">Git이란?</h2>
         <Card className="mb-6">
           <CardHeader>
             <CardTitle>버전 관리 시스템 (VCS)</CardTitle>
@@ -46,7 +46,7 @@ export default function GitGuide() {
 
       {/* Basic Concepts */}
       <section className="mb-12" id="concepts">
-        <h2 className="text-3xl font-bold mb-6">핵심 개념</h2>
+        <h2 className="text-2xl font-bold mb-6">핵심 개념</h2>
 
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <Card>
@@ -165,7 +165,7 @@ export default function GitGuide() {
 
       {/* Essential Commands */}
       <section className="mb-12" id="commands">
-        <h2 className="text-3xl font-bold mb-6">필수 명령어</h2>
+        <h2 className="text-2xl font-bold mb-6">필수 명령어</h2>
 
         <div className="space-y-6">
           {/* Initialize & Clone */}
@@ -432,7 +432,7 @@ export default function GitGuide() {
 
       {/* Workflows */}
       <section className="mb-12" id="workflows">
-        <h2 className="text-3xl font-bold mb-6">실전 워크플로우</h2>
+        <h2 className="text-2xl font-bold mb-6">실전 워크플로우</h2>
 
         <div className="space-y-6">
           {/* Solo Development */}
@@ -555,7 +555,7 @@ export default function GitGuide() {
 
       {/* Best Practices */}
       <section className="mb-12">
-        <h2 className="text-3xl font-bold mb-6">Git 사용 팁</h2>
+        <h2 className="text-2xl font-bold mb-6">Git 사용 팁</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
@@ -622,7 +622,7 @@ export default function GitGuide() {
 
       {/* .gitignore */}
       <section className="mb-12">
-        <h2 className="text-3xl font-bold mb-6">.gitignore 설정</h2>
+        <h2 className="text-2xl font-bold mb-6">.gitignore 설정</h2>
 
         <Card>
           <CardHeader>
@@ -654,7 +654,7 @@ export default function GitGuide() {
 
       {/* Quick Reference */}
       <section className="mb-12">
-        <h2 className="text-3xl font-bold mb-6">빠른 참조</h2>
+        <h2 className="text-2xl font-bold mb-6">빠른 참조</h2>
 
         <Card>
           <CardHeader>
@@ -692,7 +692,7 @@ export default function GitGuide() {
 
       {/* Resources */}
       <section className="mb-12">
-        <h2 className="text-3xl font-bold mb-6">더 배우기</h2>
+        <h2 className="text-2xl font-bold mb-6">더 배우기</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
