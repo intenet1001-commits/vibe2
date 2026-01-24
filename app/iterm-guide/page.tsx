@@ -437,6 +437,529 @@ export default function ITermGuidePage() {
           </Card>
         </div>
       </section>
+
+      <Separator className="my-12" />
+
+      {/* 터미널 명령어 가이드 */}
+      <section className="mb-12">
+        <div className="mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3">Linux/Unix 터미널 명령어</h2>
+          <p className="text-muted-foreground">
+            macOS 터미널에서 자주 사용하는 필수 명령어 모음
+          </p>
+        </div>
+
+        <Tabs defaultValue="files" className="w-full">
+          <TabsList className="grid w-full grid-cols-5 mb-2">
+            <TabsTrigger value="files">파일 탐색</TabsTrigger>
+            <TabsTrigger value="manipulation">파일 조작</TabsTrigger>
+            <TabsTrigger value="content">파일 내용</TabsTrigger>
+            <TabsTrigger value="search">검색/필터</TabsTrigger>
+            <TabsTrigger value="system">시스템</TabsTrigger>
+          </TabsList>
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="network">네트워크</TabsTrigger>
+            <TabsTrigger value="permission">권한</TabsTrigger>
+            <TabsTrigger value="archive">압축</TabsTrigger>
+            <TabsTrigger value="tips">팁/조합</TabsTrigger>
+            <TabsTrigger value="macos">macOS 전용</TabsTrigger>
+          </TabsList>
+
+          {/* 파일 및 디렉토리 탐색 */}
+          <TabsContent value="files" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>파일 및 디렉토리 탐색</CardTitle>
+                <CardDescription>경로 확인, 목록 조회, 이동</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">pwd</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">현재 디렉토리 경로 출력</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">pwd</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">ls</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">디렉토리 내용 목록</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">ls -la</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">cd</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">디렉토리 이동</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">cd ~/Documents</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">tree</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">디렉토리 구조를 트리로 표시</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">tree -L 2</code>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* 파일 조작 */}
+          <TabsContent value="manipulation" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>파일 조작</CardTitle>
+                <CardDescription>복사, 이동, 삭제, 생성</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">cp</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">파일/폴더 복사</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">cp -r folder/ newfolder/</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">mv</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">파일 이동 또는 이름 변경</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">mv old.txt new.txt</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">rm</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">파일 삭제</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">rm -rf folder/</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">mkdir</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">디렉토리 생성</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">mkdir -p path/to/folder</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">touch</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">빈 파일 생성 또는 타임스탬프 갱신</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">touch newfile.txt</code>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* 파일 내용 확인 */}
+          <TabsContent value="content" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>파일 내용 확인</CardTitle>
+                <CardDescription>파일 읽기, 모니터링</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">cat</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">파일 전체 내용 출력</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">cat file.txt</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">head</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">파일 앞부분 출력</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">head -n 20 file.txt</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">tail</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">파일 뒷부분 출력 (실시간 모니터링)</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">tail -f log.txt</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">less</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">페이지 단위로 파일 보기 (q로 종료)</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">less file.txt</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">wc</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">줄/단어/바이트 수 세기</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">wc -l file.txt</code>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* 검색 및 필터링 */}
+          <TabsContent value="search" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>검색 및 필터링</CardTitle>
+                <CardDescription>파일 찾기, 텍스트 검색 및 처리</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">find</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">파일/폴더 검색</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">{`find . -name "*.txt"`}</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">grep</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">텍스트 패턴 검색</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">{`grep -r "검색어" ./`}</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">awk</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">텍스트 처리 (열 추출)</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">{`awk '{print $1}' file.txt`}</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">sed</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">텍스트 치환</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">{`sed 's/old/new/g' file.txt`}</code>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* 시스템 및 프로세스 */}
+          <TabsContent value="system" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>시스템 및 프로세스</CardTitle>
+                <CardDescription>프로세스 관리, 디스크 사용량</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">ps</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">실행 중인 프로세스 목록</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">ps aux</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">top / htop</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">실시간 프로세스 모니터링</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">top</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">kill</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">프로세스 종료</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">kill -9 PID</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">df</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">디스크 사용량</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">df -h</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">du</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">디렉토리 크기</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">du -sh *</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">whoami</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">현재 사용자 확인</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">whoami</code>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* 네트워크 */}
+          <TabsContent value="network" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>네트워크</CardTitle>
+                <CardDescription>네트워크 요청, 연결 테스트</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">curl</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">URL 요청</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">curl -O https://example.com/file.zip</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">wget</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">파일 다운로드 (설치 필요)</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">wget https://example.com/file.zip</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">ping</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">네트워크 연결 테스트</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">ping google.com</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">ifconfig</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">네트워크 인터페이스 정보</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">ifconfig</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">lsof</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">포트 사용 확인</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">lsof -i :8080</code>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* 권한 및 소유권 */}
+          <TabsContent value="permission" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>권한 및 소유권</CardTitle>
+                <CardDescription>파일 권한 관리</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">chmod</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">파일 권한 변경</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">chmod 755 script.sh</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">chown</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">소유자 변경</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">chown user:group file.txt</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">sudo</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">관리자 권한 실행</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">sudo command</code>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* 압축 및 아카이브 */}
+          <TabsContent value="archive" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>압축 및 아카이브</CardTitle>
+                <CardDescription>파일 압축 및 해제</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">tar</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">아카이브 생성/해제</p>
+                  </div>
+                  <div className="text-right">
+                    <code className="text-xs bg-muted px-2 py-1 rounded block mb-1">tar -czvf archive.tar.gz folder/</code>
+                    <code className="text-xs bg-muted px-2 py-1 rounded block">tar -xzvf archive.tar.gz</code>
+                  </div>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">zip / unzip</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">ZIP 압축</p>
+                  </div>
+                  <div className="text-right">
+                    <code className="text-xs bg-muted px-2 py-1 rounded block mb-1">zip -r archive.zip folder/</code>
+                    <code className="text-xs bg-muted px-2 py-1 rounded block">unzip archive.zip</code>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* 유용한 조합 및 팁 */}
+          <TabsContent value="tips" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>유용한 조합 및 팁</CardTitle>
+                <CardDescription>파이프, 리다이렉션, 히스토리</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <p className="font-medium mb-2">파이프(|)로 명령어 연결</p>
+                  <div className="bg-muted p-3 rounded text-sm font-mono space-y-1">
+                    <p>{`ls -la | grep ".txt"`} <span className="text-muted-foreground ml-2"># txt 파일만 필터링</span></p>
+                    <p>cat file.txt | sort | uniq <span className="text-muted-foreground ml-2"># 정렬 후 중복 제거</span></p>
+                  </div>
+                </div>
+                <Separator />
+                <div>
+                  <p className="font-medium mb-2">리다이렉션</p>
+                  <div className="bg-muted p-3 rounded text-sm font-mono space-y-1">
+                    <p>{`echo "hello" > file.txt`} <span className="text-muted-foreground ml-2"># 덮어쓰기</span></p>
+                    <p>{`echo "world" >> file.txt`} <span className="text-muted-foreground ml-2"># 추가</span></p>
+                  </div>
+                </div>
+                <Separator />
+                <div>
+                  <p className="font-medium mb-2">명령어 히스토리</p>
+                  <div className="bg-muted p-3 rounded text-sm font-mono space-y-1">
+                    <p>history <span className="text-muted-foreground ml-2"># 이전 명령어 목록</span></p>
+                    <p>!! <span className="text-muted-foreground ml-2"># 마지막 명령어 재실행</span></p>
+                    <p>!grep <span className="text-muted-foreground ml-2"># grep으로 시작하는 마지막 명령어</span></p>
+                  </div>
+                </div>
+                <Separator />
+                <div>
+                  <p className="font-medium mb-2">백그라운드 실행</p>
+                  <div className="bg-muted p-3 rounded text-sm font-mono space-y-1">
+                    <p>command & <span className="text-muted-foreground ml-2"># 백그라운드 실행</span></p>
+                    <p>nohup command & <span className="text-muted-foreground ml-2"># 터미널 종료해도 계속 실행</span></p>
+                  </div>
+                </div>
+                <Separator />
+                <div>
+                  <p className="font-medium mb-2">필수 단축키</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">실행 중인 명령 중단</span>
+                      <kbd className="px-2 py-1 bg-muted rounded text-sm">Ctrl + C</kbd>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">일시정지</span>
+                      <kbd className="px-2 py-1 bg-muted rounded text-sm">Ctrl + Z</kbd>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">히스토리 검색</span>
+                      <kbd className="px-2 py-1 bg-muted rounded text-sm">Ctrl + R</kbd>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">자동완성</span>
+                      <kbd className="px-2 py-1 bg-muted rounded text-sm">Tab</kbd>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* macOS 전용 명령어 */}
+          <TabsContent value="macos" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>macOS 전용 명령어</CardTitle>
+                <CardDescription>macOS에서만 사용 가능한 유용한 명령어</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">open</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">파일/폴더/앱 열기</p>
+                  </div>
+                  <div className="text-right">
+                    <code className="text-xs bg-muted px-2 py-1 rounded block mb-1">open .</code>
+                    <code className="text-xs bg-muted px-2 py-1 rounded block">{`open -a "Safari"`}</code>
+                  </div>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">pbcopy</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">클립보드에 복사</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">cat file.txt | pbcopy</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">pbpaste</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">클립보드 내용 붙여넣기</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">{`pbpaste > file.txt`}</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">say</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">텍스트 음성 출력</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">{`say "Hello"`}</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">caffeinate</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">잠자기 방지</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">caffeinate -t 3600</code>
+                </div>
+                <Separator />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <kbd className="px-2 py-1 bg-muted rounded text-sm font-mono">mdfind</kbd>
+                    <p className="text-sm text-muted-foreground mt-1">Spotlight 검색</p>
+                  </div>
+                  <code className="text-xs bg-muted px-2 py-1 rounded">{`mdfind "keyword"`}</code>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </section>
     </div>
   );
 }
