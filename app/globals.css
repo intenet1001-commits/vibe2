@@ -54,18 +54,29 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  /* Brand Colors - Violet (AI/Education) */
+  --primary: oklch(0.55 0.15 280);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  /* Accent - Cyan/Blue (Tech/Innovation) */
+  --accent: oklch(0.92 0.04 250);
   --accent-foreground: oklch(0.205 0 0);
+  /* Semantic Colors for Education */
+  --success: oklch(0.65 0.15 145);
+  --success-foreground: oklch(0.985 0 0);
+  --info: oklch(0.6 0.12 240);
+  --info-foreground: oklch(0.985 0 0);
+  --warning: oklch(0.75 0.15 85);
+  --warning-foreground: oklch(0.145 0 0);
+  --error: oklch(0.577 0.245 27.325);
+  --error-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: oklch(0.55 0.15 280);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -73,46 +84,57 @@
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary: oklch(0.55 0.15 280);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-ring: oklch(0.55 0.15 280);
 }
 
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+  --card: oklch(0.22 0 0);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
+  --popover: oklch(0.22 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  /* Brand Colors - Violet (AI/Education) */
+  --primary: oklch(0.7 0.18 280);
+  --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
+  /* Accent - Cyan/Blue (Tech/Innovation) */
+  --accent: oklch(0.4 0.08 250);
   --accent-foreground: oklch(0.985 0 0);
+  /* Semantic Colors for Education */
+  --success: oklch(0.55 0.12 145);
+  --success-foreground: oklch(0.985 0 0);
+  --info: oklch(0.55 0.1 240);
+  --info-foreground: oklch(0.985 0 0);
+  --warning: oklch(0.65 0.12 85);
+  --warning-foreground: oklch(0.145 0 0);
+  --error: oklch(0.704 0.191 22.216);
+  --error-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  --border: oklch(1 0 0 / 15%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --ring: oklch(0.7 0.18 280);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
+  --sidebar: oklch(0.22 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary: oklch(0.7 0.18 280);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-border: oklch(1 0 0 / 15%);
+  --sidebar-ring: oklch(0.7 0.18 280);
 }
 
 @layer base {
@@ -122,14 +144,52 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Typography Standards */
+  h1 {
+    @apply text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl;
+  }
+  h2 {
+    @apply text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl;
+  }
+  h3 {
+    @apply text-xl font-semibold tracking-tight sm:text-2xl lg:text-3xl;
+  }
+  h4 {
+    @apply text-lg font-semibold tracking-tight sm:text-xl;
+  }
+  h5 {
+    @apply text-base font-semibold tracking-tight sm:text-lg;
+  }
+  h6 {
+    @apply text-sm font-semibold tracking-tight sm:text-base;
+  }
+
+  /* Code Block Improvements */
+  code {
+    @apply font-mono text-sm leading-relaxed;
+  }
+  pre {
+    @apply font-mono leading-relaxed;
+  }
+
+  /* Focus Indicators */
+  *:focus-visible {
+    @apply outline-primary outline-2 outline-offset-2;
+  }
+
+  /* Senior Mode Focus Enhancement */
+  .senior-mode *:focus-visible {
+    @apply outline-[5px];
+  }
 }
 
 /* 고령자 모드 - Senior Mode (반응형) */
 
 /* 모바일 (기본) */
 .senior-mode {
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.7;
 }
 
 .senior-mode h1 {
@@ -365,5 +425,87 @@
 
   .senior-mode .text-2xl {
     font-size: 2.25rem !important;
+  }
+}
+
+/* Utility Classes */
+@layer utilities {
+  /* Page Container - Narrow */
+  .page-container-narrow {
+    @apply mx-auto max-w-4xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section Spacing */
+  .section-spacing {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  /* Highlight Boxes for Tips/Warnings */
+  .highlight-box-info {
+    @apply rounded-lg border-2 border-info bg-info/10 p-4 text-info-foreground;
+  }
+
+  .highlight-box-warning {
+    @apply rounded-lg border-2 border-warning bg-warning/10 p-4 text-warning-foreground;
+  }
+
+  .highlight-box-success {
+    @apply rounded-lg border-2 border-success bg-success/10 p-4 text-success-foreground;
+  }
+
+  .highlight-box-error {
+    @apply rounded-lg border-2 border-error bg-error/10 p-4 text-error-foreground;
+  }
+
+  /* Glassmorphic Effect */
+  .glass {
+    @apply bg-background/80 backdrop-blur-md;
+  }
+
+  /* Card Hover Animation */
+  .card-hover {
+    @apply transition-all duration-200 hover:scale-[1.02] hover:shadow-lg;
+  }
+
+  /* Fade In Up Animation */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-out;
+  }
+
+  /* Section Highlight */
+  .section-highlight {
+    @apply bg-accent/5 py-12 sm:py-16 lg:py-20;
+  }
+
+  /* Shiki Code Block Styling */
+  .shiki-wrapper pre {
+    @apply m-0 p-4 rounded-lg overflow-x-auto;
+  }
+
+  .shiki-wrapper code {
+    @apply font-mono text-sm leading-relaxed;
+  }
+}
+
+/* Reduced Motion Support for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
