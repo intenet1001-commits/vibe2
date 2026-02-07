@@ -1,7 +1,15 @@
+import { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CodeBlock, CodeBlockMultiLine } from "@/components/ui/code-block";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { PageNavigation } from "@/components/page-navigation";
+import { BackToTop } from "@/components/back-to-top";
+
+export const metadata: Metadata = {
+  title: "Git 완벽 가이드 - AI 오케스트레이팅",
+  description: "버전 관리 기초부터 실전 워크플로우까지. Git과 GitHub 사용법을 배워보세요.",
+};
 
 export default function GitGuide() {
   return (
@@ -59,11 +67,11 @@ export default function GitGuide() {
               </p>
               <div className="space-y-2">
                 <div>
-                  <Badge variant="outline" className="mb-2">Local Repository</Badge>
+                  <Badge variant="outline" className="mb-2">Local Repository (로컬 저장소)</Badge>
                   <p className="text-sm text-muted-foreground">내 컴퓨터에 있는 저장소</p>
                 </div>
                 <div>
-                  <Badge variant="outline" className="mb-2">Remote Repository</Badge>
+                  <Badge variant="outline" className="mb-2">Remote Repository (원격 저장소)</Badge>
                   <p className="text-sm text-muted-foreground">GitHub 등 온라인 저장소</p>
                 </div>
               </div>
@@ -126,7 +134,7 @@ export default function GitGuide() {
             <div className="bg-muted p-6 rounded-lg font-mono text-sm">
               <div className="space-y-2">
                 <div className="flex items-center gap-4">
-                  <Badge>Working Directory</Badge>
+                  <Badge>Working Directory (작업 폴더)</Badge>
                   <span className="text-muted-foreground">→</span>
                   <span className="text-muted-foreground">작업 중인 파일들</span>
                 </div>
@@ -135,16 +143,22 @@ export default function GitGuide() {
                   <span className="text-muted-foreground">↓</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Badge variant="secondary">Staging Area</Badge>
+                  <Badge variant="secondary">Staging Area (준비 영역)</Badge>
                   <span className="text-muted-foreground">→</span>
                   <span className="text-muted-foreground">커밋 준비 중인 파일들</span>
+                </div>
+                <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mt-4">
+                  <p className="text-sm text-blue-700 dark:text-blue-300">
+                    💡 <strong>비유하자면:</strong> Staging Area는 마트의 장바구니와 같습니다.
+                    물건(파일)을 골라서 장바구니(staging)에 담고, 계산(commit)하는 것과 같은 흐름입니다.
+                  </p>
                 </div>
                 <div className="flex items-center gap-4 ml-8">
                   <code className="text-xs">git commit</code>
                   <span className="text-muted-foreground">↓</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Badge variant="outline">Local Repository</Badge>
+                  <Badge variant="outline">Local Repository (로컬 저장소)</Badge>
                   <span className="text-muted-foreground">→</span>
                   <span className="text-muted-foreground">로컬 저장소에 저장</span>
                 </div>
@@ -153,7 +167,7 @@ export default function GitGuide() {
                   <span className="text-muted-foreground">↓</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Badge variant="default">Remote Repository</Badge>
+                  <Badge variant="default">Remote Repository (원격 저장소)</Badge>
                   <span className="text-muted-foreground">→</span>
                   <span className="text-muted-foreground">원격 저장소에 업로드</span>
                 </div>
@@ -419,9 +433,13 @@ export default function GitGuide() {
                     <p className="text-xs text-muted-foreground mb-1">직전 커밋 취소 (변경사항은 유지)</p>
                     <CodeBlock code="git reset --soft HEAD~1" />
                   </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground mb-1">직전 커밋 취소 (변경사항도 삭제) - 주의!</p>
+                  <div className="bg-red-50 dark:bg-red-950 border-2 border-red-500 rounded-lg p-4">
+                    <p className="text-sm font-bold text-red-700 dark:text-red-300 mb-2">⚠️ 매우 위험한 명령어</p>
+                    <p className="text-xs text-muted-foreground mb-1">직전 커밋 취소 (변경사항도 삭제) - 복구 불가!</p>
                     <CodeBlock code="git reset --hard HEAD~1" />
+                    <p className="text-xs text-red-600 dark:text-red-400 mt-2">
+                      이 명령어를 실행하면 작업 중이던 코드가 완전히 사라집니다. 신중하게 사용하세요!
+                    </p>
                   </div>
                 </div>
               </div>
@@ -506,7 +524,7 @@ export default function GitGuide() {
           {/* Team Collaboration */}
           <Card>
             <CardHeader>
-              <CardTitle>팀 협업 워크플로우</CardTitle>
+              <CardTitle>팀 협업 워크플로우 <Badge variant="secondary" className="ml-2">중급</Badge></CardTitle>
               <CardDescription>Pull Request를 활용한 협업 방식</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -630,6 +648,14 @@ export default function GitGuide() {
             <CardDescription>Git이 무시할 파일/폴더를 지정</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
+            <div className="mb-4">
+              <h4 className="font-semibold mb-2">.gitignore 파일 만들기</h4>
+              <CodeBlock code="touch .gitignore" />
+              <p className="text-sm text-muted-foreground mt-2">
+                프로젝트 루트 폴더에서 위 명령어를 실행하면 .gitignore 파일이 생성됩니다.
+              </p>
+            </div>
+            <Separator />
             <div>
               <h4 className="font-semibold mb-2">Node.js 프로젝트 예시</h4>
               <CodeBlockMultiLine lines={[
@@ -690,6 +716,36 @@ export default function GitGuide() {
         </Card>
       </section>
 
+      {/* Claude Code Git Tips */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6">Claude Code로 Git 작업하기</h2>
+        <Card>
+          <CardHeader>
+            <CardTitle>Claude Code에게 Git 작업 요청하기</CardTitle>
+            <CardDescription>터미널 명령어를 몰라도 Claude Code가 대신해줍니다</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <p className="text-sm text-muted-foreground mb-2">Claude Code에 이렇게 말해보세요:</p>
+              <div className="space-y-3">
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">&quot;변경사항을 커밋해줘&quot;</p>
+                  <CodeBlock code='→ git add . && git commit -m "적절한 커밋 메시지"' />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">&quot;GitHub에 올려줘&quot;</p>
+                  <CodeBlock code="→ git push origin main" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">&quot;새 기능 브랜치 만들어줘&quot;</p>
+                  <CodeBlock code="→ git checkout -b feature/새기능" />
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
       {/* Resources */}
       <section className="mb-12">
         <h2 className="text-2xl font-bold mb-6">더 배우기</h2>
@@ -724,6 +780,9 @@ export default function GitGuide() {
           </Card>
         </div>
       </section>
+
+      <PageNavigation currentPath="/git-guide" />
+      <BackToTop />
     </div>
   );
 }

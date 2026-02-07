@@ -1,8 +1,16 @@
+import { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { CodeBlock, CodeBlockMultiLine } from "@/components/ui/code-block";
+import { PageNavigation } from "@/components/page-navigation";
+import { BackToTop } from "@/components/back-to-top";
+
+export const metadata: Metadata = {
+  title: "개발 환경 설치 가이드 - AI 오케스트레이팅",
+  description: "Node.js, Git, Claude Code 설치 및 GitHub/Vercel/Supabase 연동 가이드",
+};
 
 export default function SetupGuide() {
   return (
@@ -40,17 +48,6 @@ export default function SetupGuide() {
             <a href="#supabase" className="text-primary hover:underline">Supabase 연동</a>
             <a href="#cli-tools" className="text-primary hover:underline">Claude Code 말고 다른 시리즈도 많아요</a>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Version Check Section */}
-      <Card className="mb-8" id="version-check">
-        <CardHeader>
-          <CardTitle>버전 확인 명령어</CardTitle>
-          <CardDescription>설치 후 아래 명령어로 버전을 확인하세요</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <CodeBlock code="node --version && npm --version && git --version && claude --version" />
         </CardContent>
       </Card>
 
@@ -104,6 +101,10 @@ export default function SetupGuide() {
                   "echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"' >> ~/.zprofile",
                   "eval \"$(/opt/homebrew/bin/brew shellenv)\""
                 ]} />
+                <p className="text-sm text-muted-foreground mt-2">
+                  이 명령어는 터미널이 Homebrew를 찾을 수 있도록 경로를 설정합니다.
+                  M1/M2/M3 Mac은 Homebrew가 /opt/homebrew에 설치되기 때문에 이 설정이 필요합니다.
+                </p>
               </div>
 
               <Separator />
@@ -190,6 +191,9 @@ export default function SetupGuide() {
                   'git config --global user.name "Your Name"',
                   'git config --global user.email "your.email@example.com"'
                 ]} />
+                <p className="text-sm text-amber-600 dark:text-amber-400 mt-2">
+                  ⚠️ &quot;Your Name&quot;과 &quot;your.email@example.com&quot;을 실제 본인 정보로 바꾸세요!
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -250,6 +254,16 @@ export default function SetupGuide() {
                     <span className="text-orange-500">📁 ~/my-project</span>
                   </div>
                 </div>
+              </div>
+
+              <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mt-4">
+                <p className="text-sm font-semibold text-amber-700 dark:text-amber-300 mb-1">구독 필요</p>
+                <p className="text-sm text-amber-600 dark:text-amber-400">
+                  Claude Code를 사용하려면 Claude Pro 또는 Max 구독이 필요합니다 (월 $20~).{" "}
+                  <a href="https://claude.ai/upgrade" target="_blank" rel="noopener noreferrer" className="underline">
+                    구독 페이지 →
+                  </a>
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -322,6 +336,9 @@ export default function SetupGuide() {
                   'git config --global user.name "Your Name"',
                   'git config --global user.email "your.email@example.com"'
                 ]} />
+                <p className="text-sm text-amber-600 dark:text-amber-400 mt-2">
+                  ⚠️ &quot;Your Name&quot;과 &quot;your.email@example.com&quot;을 실제 본인 정보로 바꾸세요!
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -382,6 +399,16 @@ export default function SetupGuide() {
                     <span className="text-orange-500">📁 ~/my-project</span>
                   </div>
                 </div>
+              </div>
+
+              <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mt-4">
+                <p className="text-sm font-semibold text-amber-700 dark:text-amber-300 mb-1">구독 필요</p>
+                <p className="text-sm text-amber-600 dark:text-amber-400">
+                  Claude Code를 사용하려면 Claude Pro 또는 Max 구독이 필요합니다 (월 $20~).{" "}
+                  <a href="https://claude.ai/upgrade" target="_blank" rel="noopener noreferrer" className="underline">
+                    구독 페이지 →
+                  </a>
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -655,6 +682,20 @@ export default function SetupGuide() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Version Check Section - moved to bottom */}
+      <Card className="mt-8" id="version-check">
+        <CardHeader>
+          <CardTitle>버전 확인 명령어</CardTitle>
+          <CardDescription>설치 후 아래 명령어로 버전을 확인하세요</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <CodeBlock code="node --version && npm --version && git --version && claude --version" />
+        </CardContent>
+      </Card>
+
+      <PageNavigation currentPath="/setup-guide" />
+      <BackToTop />
     </div>
   );
 }

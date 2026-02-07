@@ -1,7 +1,15 @@
+import { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PageNavigation } from "@/components/page-navigation";
+import { BackToTop } from "@/components/back-to-top";
+
+export const metadata: Metadata = {
+  title: "iTerm2 단축키 가이드 - AI 오케스트레이팅",
+  description: "생산성을 높이는 터미널 단축키 완벽 가이드. macOS iTerm2 설치부터 활용까지.",
+};
 
 export default function ITermGuidePage() {
   return (
@@ -960,6 +968,9 @@ export default function ITermGuidePage() {
           </TabsContent>
         </Tabs>
       </section>
+
+      <PageNavigation currentPath="/iterm-guide" />
+      <BackToTop />
     </div>
   );
 }

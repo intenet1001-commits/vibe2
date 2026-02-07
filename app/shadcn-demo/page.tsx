@@ -1,7 +1,15 @@
+import { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { PageNavigation } from "@/components/page-navigation";
+import { BackToTop } from "@/components/back-to-top";
+
+export const metadata: Metadata = {
+  title: "shadcn/ui 비교 데모 - AI 오케스트레이팅",
+  description: "기본 HTML/CSS 스타일과 shadcn/ui의 차이를 직접 비교해보세요.",
+};
 
 export default function ShadcnDemo() {
   return (
@@ -12,6 +20,26 @@ export default function ShadcnDemo() {
         <p className="text-xl text-muted-foreground">
           기본 스타일과 shadcn/ui의 차이를 직접 확인해보세요
         </p>
+      </div>
+
+      {/* shadcn/ui Explanation */}
+      <div className="max-w-3xl mx-auto mb-12">
+        <Card>
+          <CardHeader>
+            <CardTitle>shadcn/ui란?</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm text-muted-foreground">
+            <p>
+              shadcn/ui는 복사-붙여넣기 방식의 UI 컴포넌트 라이브러리입니다.
+              일반적인 npm 패키지와 달리, 컴포넌트 코드가 프로젝트에 직접 복사되어
+              자유롭게 수정할 수 있습니다.
+            </p>
+            <p>
+              Radix UI (접근성) + Tailwind CSS (스타일링)을 기반으로 하여,
+              세련되고 접근성 높은 UI를 빠르게 구축할 수 있습니다.
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Comparison Section */}
@@ -251,6 +279,28 @@ export default function ShadcnDemo() {
           </Card>
         </div>
       </div>
+
+      {/* CTA */}
+      <div className="mt-12 text-center">
+        <Card className="max-w-md mx-auto">
+          <CardContent className="pt-6">
+            <p className="text-sm text-muted-foreground mb-4">
+              shadcn/ui를 프로젝트에 설치하고 싶다면?
+            </p>
+            <div className="bg-muted p-3 rounded-lg mb-3">
+              <code className="text-sm">npx shadcn@latest init</code>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              홈페이지의 빠른 시작 Step 2에서 더 자세히 알아보세요.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="max-w-5xl mx-auto">
+        <PageNavigation currentPath="/shadcn-demo" />
+      </div>
+      <BackToTop />
     </div>
   );
 }
