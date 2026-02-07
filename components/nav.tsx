@@ -15,7 +15,7 @@ const navItems = [
   { href: "/claude-code-guide", label: "Claude Code" },
   { href: "/git-guide", label: "Git 가이드" },
   { href: "/iterm-guide", label: "iTerm2 가이드" },
-  { href: "/tmux-guide", label: "tmux 가이드" },
+  { href: "/tmux-guide", label: "Agent Teams" },
   { href: "/shadcn-demo", label: "shadcn/ui 데모" },
 ];
 

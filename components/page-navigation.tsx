@@ -6,7 +6,7 @@ const learningPath = [
   { href: "/claude-code-guide", label: "Claude Code 가이드" },
   { href: "/git-guide", label: "Git 가이드" },
   { href: "/iterm-guide", label: "iTerm2 가이드" },
-  { href: "/tmux-guide", label: "tmux 가이드" },
+  { href: "/tmux-guide", label: "Agent Teams 가이드" },
   { href: "/shadcn-demo", label: "shadcn/ui 데모" },
 ];
 

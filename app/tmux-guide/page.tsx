@@ -7,8 +7,8 @@ import { AlertCircle, CheckCircle2, Terminal } from "lucide-react";
 import { PageNavigation } from "@/components/page-navigation";
 
 export const metadata: Metadata = {
-  title: "Claude Code + tmux 멀티 에이전트 가이드 - AI 오케스트레이팅",
-  description: "Claude Code에서 tmux로 여러 AI 에이전트를 병렬로 실행하는 방법. Agent Teams 설정부터 실전까지.",
+  title: "Agent Teams 가이드 - AI 오케스트레이팅",
+  description: "여러 AI 에이전트를 팀으로 운영하는 방법. Claude Code Agent Teams 설정부터 실전까지.",
 };
 
 export default function TmuxGuide() {
@@ -17,10 +17,10 @@ export default function TmuxGuide() {
       {/* Header */}
       <div className="text-center mb-10">
         <h1 className="text-3xl md:text-4xl font-bold mb-3">
-          Claude Code + tmux Agent Teams 가이드
+          Agent Teams 가이드
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground">
-          여러 AI 에이전트를 동시에 실행하여 작업 효율 극대화
+          여러 AI 에이전트를 팀으로 운영하여 작업 효율 극대화
         </p>
         <div className="flex gap-2 justify-center flex-wrap mt-6">
           <Badge variant="outline">Claude Code</Badge>

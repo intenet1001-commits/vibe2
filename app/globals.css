@@ -440,23 +440,6 @@
     @apply py-12 sm:py-16 lg:py-20;
   }
 
-  /* Highlight Boxes for Tips/Warnings */
-  .highlight-box-info {
-    @apply rounded-lg border-2 border-info bg-info/10 p-4 text-info-foreground;
-  }
-
-  .highlight-box-warning {
-    @apply rounded-lg border-2 border-warning bg-warning/10 p-4 text-warning-foreground;
-  }
-
-  .highlight-box-success {
-    @apply rounded-lg border-2 border-success bg-success/10 p-4 text-success-foreground;
-  }
-
-  .highlight-box-error {
-    @apply rounded-lg border-2 border-error bg-error/10 p-4 text-error-foreground;
-  }
-
   /* Glassmorphic Effect */
   .glass {
     @apply bg-background/80 backdrop-blur-md;
@@ -496,16 +479,16 @@
   .shiki-wrapper code {
     @apply font-mono text-sm leading-relaxed;
   }
-}
 
-/* Reduced Motion Support for Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  /* Reduced Motion Support for Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

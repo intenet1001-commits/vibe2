@@ -58,10 +58,10 @@ const blogCards = [
   },
   {
     id: "tmux-guide",
-    title: "Claude Code + tmux 가이드",
-    description: "멀티 에이전트 병렬 실행으로 작업 효율 극대화",
+    title: "Agent Teams 가이드",
+    description: "여러 AI 에이전트를 팀으로 운영하여 작업 효율 극대화",
     icon: "🤖",
-    tags: ["tmux", "Agent Teams", "병렬 처리"],
+    tags: ["Agent Teams", "멀티 에이전트", "팀 협업", "tmux"],
     href: "/tmux-guide",
     color: "from-[oklch(0.55_0.15_280)] to-[oklch(0.6_0.18_300)]",
     order: "⑥",
