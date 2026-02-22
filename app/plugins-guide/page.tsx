@@ -19,9 +19,9 @@ const plugins = [
     org: "intenet1001-commits",
     description: "CS 관련 Claude Code 플러그인 모음. 다양한 개발 워크플로우를 강화하는 플러그인들을 제공합니다.",
     repoUrl: "https://github.com/intenet1001-commits/cs_plugins",
-    marketplace: null,
-    cloneTarget: "~/.claude/plugins/cs_plugins",
-    cloneCmd: "git clone https://github.com/intenet1001-commits/cs_plugins ~/.claude/plugins/cs_plugins",
+    marketplace: "/plugin marketplace add intenet1001-commits/cs_plugins",
+    cloneTarget: "~/.claude/plugins/marketplaces/cs_plugins",
+    cloneCmd: "git clone https://github.com/intenet1001-commits/cs_plugins ~/.claude/plugins/marketplaces/cs_plugins",
     tags: ["CS", "워크플로우", "개발"],
   },
   {
