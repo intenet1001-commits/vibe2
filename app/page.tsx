@@ -66,6 +66,16 @@ const blogCards = [
     color: "from-[oklch(0.55_0.15_280)] to-[oklch(0.6_0.18_300)]",
     order: "⑥",
   },
+  {
+    id: "plugins-guide",
+    title: "Claude Code 플러그인 모음",
+    description: "git clone & 마켓플레이스로 설치하는 추천 플러그인 3종",
+    icon: "🔌",
+    tags: ["플러그인", "마켓플레이스", "git clone"],
+    href: "/plugins-guide",
+    color: "from-[oklch(0.6_0.18_20)] to-[oklch(0.65_0.2_40)]",
+    order: "⑦",
+  },
 ];
 
 export default function Home() {
