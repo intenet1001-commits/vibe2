@@ -32,6 +32,7 @@ const communityPlugins = [
     icon: "🧩",
     name: "plugins-for-claude-natives",
     org: "team-attention",
+    badge: "커뮤니티",
     description: "Agent Council, 요구사항 명확화, YouTube 요약, Gmail, KakaoTalk 등 7개 플러그인을 포함한 실전 플러그인 모음입니다.",
     repoUrl: "https://github.com/team-attention/plugins-for-claude-natives",
     marketplace: "/plugin marketplace add team-attention/plugins-for-claude-natives",
@@ -44,12 +45,26 @@ const communityPlugins = [
     icon: "🚀",
     name: "oh-my-claudecode",
     org: "Yeachan-Heo",
+    badge: "커뮤니티",
     description: "멀티 에이전트 오케스트레이션 프레임워크. 32+ 전문 에이전트, 40+ 스킬을 제공하는 강력한 플러그인입니다.",
     repoUrl: "https://github.com/Yeachan-Heo/oh-my-claudecode",
     marketplace: "/plugin marketplace add https://github.com/Yeachan-Heo/oh-my-claudecode",
     cloneTarget: null,
     cloneCmd: "gh repo clone Yeachan-Heo/oh-my-claudecode",
     tags: ["멀티 에이전트", "32+ 에이전트", "40+ 스킬", "오케스트레이션"],
+  },
+  {
+    id: "kimoring-ai-skills",
+    icon: "🎯",
+    name: "kimoring-ai-skills",
+    org: "codefactory-co",
+    badge: "퍼온 스킬",
+    description: "codefactory의 kimoring AI 스킬 모음. Claude Code에서 바로 활용할 수 있는 실용적인 스킬들을 제공합니다.",
+    repoUrl: "https://github.com/codefactory-co/kimoring-ai-skills",
+    marketplace: null,
+    cloneTarget: null,
+    cloneCmd: "git clone https://github.com/codefactory-co/kimoring-ai-skills",
+    tags: ["스킬", "AI 워크플로우", "실전"],
   },
 ];
 
@@ -111,6 +126,7 @@ export default function PluginsGuide() {
             <a href="#community-plugins" className="text-primary hover:underline">3. 커뮤니티 추천 플러그인</a>
             <a href="#plugins-for-claude-natives" className="text-primary hover:underline pl-4">└ plugins-for-claude-natives</a>
             <a href="#oh-my-claudecode" className="text-primary hover:underline pl-4">└ oh-my-claudecode</a>
+            <a href="#kimoring-ai-skills" className="text-primary hover:underline pl-4">└ kimoring-ai-skills</a>
             <a href="#github-tools" className="text-primary hover:underline">4. 깃허브에서 클론해서 써보세요</a>
             <a href="#claude-team-monitor" className="text-primary hover:underline pl-4">└ claude-team-monitor</a>
             <a href="#portmanagement" className="text-primary hover:underline pl-4">└ portmanagement</a>
@@ -285,7 +301,7 @@ export default function PluginsGuide() {
                   </a>
                 </div>
                 <div className="flex gap-1.5 flex-wrap mt-2">
-                  <Badge variant="outline">커뮤니티</Badge>
+                  <Badge variant="outline">{plugin.badge}</Badge>
                   {plugin.tags.map((tag) => (
                     <Badge key={tag} variant="secondary" className="text-xs">
                       {tag}
