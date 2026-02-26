@@ -76,6 +76,16 @@ const blogCards = [
     color: "from-[oklch(0.6_0.18_20)] to-[oklch(0.65_0.2_40)]",
     order: "⑦",
   },
+  {
+    id: "telegram-bot-guide",
+    title: "Telegram Bot EC2 설정 가이드",
+    description: "처음 설정 vs 봇만 추가 — 상황별 SSH 명령어 매뉴얼",
+    icon: "🤖",
+    tags: ["EC2", "Telegram Bot", "SSH", "service-setup-cokacdir"],
+    href: "/telegram-bot-guide",
+    color: "from-[oklch(0.55_0.18_200)] to-[oklch(0.6_0.2_220)]",
+    order: "⑧",
+  },
 ];
 
 export default function Home() {
