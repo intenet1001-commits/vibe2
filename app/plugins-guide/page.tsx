@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { CodeBlock } from "@/components/ui/code-block";
-import { AlertCircle, CheckCircle2, GitBranch, Package, Star } from "lucide-react";
+import { AlertCircle, CheckCircle2, GitBranch, Package, Star, Trophy } from "lucide-react";
 import { PageNavigation } from "@/components/page-navigation";
 
 export const metadata: Metadata = {
@@ -68,6 +68,44 @@ const communityPlugins = [
   },
 ];
 
+const featuredCreators = [
+  {
+    id: "bkit",
+    icon: "⚡",
+    name: "bkit",
+    creator: "bkit.ai",
+    badge: "추천",
+    description: "Claude Code를 위한 종합 Vibecoding 키트. PDCA 방법론, 멀티 에이전트 오케스트레이션, 9단계 개발 파이프라인을 제공하는 프로급 플러그인 생태계입니다.",
+    website: "https://www.bkit.ai/",
+    repoUrl: "https://github.com/bkitai/bkit",
+    marketplace: "/plugin marketplace add bkitai/bkit",
+    highlights: [
+      "PDCA 방법론 기반 개발 워크플로우",
+      "CTO Lead 에이전트로 팀 오케스트레이션",
+      "9단계 개발 파이프라인 (/development-pipeline)",
+      "30+ 전문 에이전트, 200+ 스킬",
+    ],
+    tags: ["PDCA", "멀티 에이전트", "Vibecoding", "개발 파이프라인"],
+  },
+  {
+    id: "cokacdir",
+    icon: "📂",
+    name: "cokacdir",
+    creator: "cokac",
+    badge: "추천",
+    description: "Claude Code 스킬을 한눈에 탐색할 수 있는 웹 기반 디렉토리. 커뮤니티가 공유한 다양한 스킬을 카테고리별로 쉽게 찾아볼 수 있습니다.",
+    website: "https://cokacdir.cokac.com/#/",
+    repoUrl: null,
+    marketplace: null,
+    highlights: [
+      "웹 UI로 Claude Code 스킬 탐색",
+      "카테고리별 스킬 분류 및 검색",
+      "커뮤니티 공유 스킬 모음",
+    ],
+    tags: ["스킬 디렉토리", "웹 탐색", "커뮤니티"],
+  },
+];
+
 const githubTools = [
   {
     id: "claude-team-monitor",
@@ -127,10 +165,13 @@ export default function PluginsGuide() {
             <a href="#plugins-for-claude-natives" className="text-primary hover:underline pl-4">└ plugins-for-claude-natives</a>
             <a href="#oh-my-claudecode" className="text-primary hover:underline pl-4">└ oh-my-claudecode</a>
             <a href="#kimoring-ai-skills" className="text-primary hover:underline pl-4">└ kimoring-ai-skills</a>
-            <a href="#github-tools" className="text-primary hover:underline">4. 깃허브에서 클론해서 써보세요</a>
+            <a href="#featured-creators" className="text-primary hover:underline">4. 유명 크리에이터 추천 도구</a>
+            <a href="#bkit" className="text-primary hover:underline pl-4">└ bkit</a>
+            <a href="#cokacdir" className="text-primary hover:underline pl-4">└ cokacdir</a>
+            <a href="#github-tools" className="text-primary hover:underline">5. 깃허브에서 클론해서 써보세요</a>
             <a href="#claude-team-monitor" className="text-primary hover:underline pl-4">└ claude-team-monitor</a>
             <a href="#portmanagement" className="text-primary hover:underline pl-4">└ portmanagement</a>
-            <a href="#notes" className="text-primary hover:underline">5. 주의사항</a>
+            <a href="#notes" className="text-primary hover:underline">6. 주의사항</a>
           </div>
         </CardContent>
       </Card>
@@ -343,11 +384,102 @@ export default function PluginsGuide() {
 
       <Separator className="mb-10" />
 
-      {/* 4. 깃허브에서 클론해서 써보세요 */}
+      {/* 4. 유명 크리에이터 추천 도구 */}
+      <section id="featured-creators" className="mb-12">
+        <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
+          <Trophy className="h-6 w-6 text-violet-500" />
+          4. 유명 크리에이터 추천 도구
+        </h2>
+        <p className="text-sm text-muted-foreground mb-6">Claude Code 생태계에서 주목받는 크리에이터들이 만든 도구와 플러그인입니다.</p>
+
+        {featuredCreators.map((item, index) => (
+          <section key={item.id} id={item.id} className="mb-8">
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <span className="text-xl">{item.icon}</span>
+              {item.name}
+            </h3>
+
+            <Card className="mb-4 border-violet-500 border-2">
+              <CardHeader>
+                <div className="flex items-start justify-between flex-wrap gap-2">
+                  <div>
+                    <CardTitle className="text-base">
+                      {item.creator}/{item.name}
+                    </CardTitle>
+                    <CardDescription className="mt-1">
+                      {item.description}
+                    </CardDescription>
+                  </div>
+                  <div className="flex gap-2 shrink-0">
+                    {item.repoUrl && (
+                      <a
+                        href={item.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-primary hover:underline"
+                      >
+                        GitHub →
+                      </a>
+                    )}
+                    <a
+                      href={item.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-violet-500 hover:underline font-medium"
+                    >
+                      방문하기 →
+                    </a>
+                  </div>
+                </div>
+                <div className="flex gap-1.5 flex-wrap mt-2">
+                  <Badge className="bg-violet-500 hover:bg-violet-600 text-white text-xs">✨ {item.badge}</Badge>
+                  {item.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary" className="text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="bg-muted/50 rounded-md p-3 text-sm">
+                  <p className="font-medium text-foreground mb-2 text-xs">✨ 주요 특징</p>
+                  <ul className="space-y-1 text-muted-foreground">
+                    {item.highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-1.5">
+                        <span className="text-violet-500 mt-0.5">•</span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {item.marketplace && (
+                  <div>
+                    <p className="text-sm font-medium mb-2 flex items-center gap-1">
+                      <CheckCircle2 className="h-4 w-4 text-green-500" />
+                      마켓플레이스 설치
+                    </p>
+                    <p className="text-xs text-muted-foreground mb-2">
+                      Claude Code 세션에서 입력하세요.
+                    </p>
+                    <CodeBlock code={item.marketplace} />
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {index < featuredCreators.length - 1 && <Separator className="mt-8 mb-8" />}
+          </section>
+        ))}
+      </section>
+
+      <Separator className="mb-10" />
+
+      {/* 5. 깃허브에서 클론해서 써보세요 */}
       <section id="github-tools" className="mb-12">
         <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
           <GitBranch className="h-6 w-6 text-primary" />
-          4. 깃허브에서 클론해서 써보세요
+          5. 깃허브에서 클론해서 써보세요
         </h2>
         <p className="text-sm text-muted-foreground mb-6">
           Claude Code 플러그인은 아니지만, 개발 워크플로우를 크게 향상시켜주는 독립 실행형 도구들입니다. 클론 후 바로 사용할 수 있습니다.
@@ -414,11 +546,11 @@ export default function PluginsGuide() {
 
       <Separator className="mb-10" />
 
-      {/* 5. 주의사항 */}
+      {/* 6. 주의사항 */}
       <section id="notes" className="mb-12">
         <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
           <AlertCircle className="h-6 w-6 text-primary" />
-          5. 주의사항
+          6. 주의사항
         </h2>
 
         <Card>
