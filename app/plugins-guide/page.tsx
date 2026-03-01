@@ -28,6 +28,19 @@ const myPlugins = [
 
 const communityPlugins = [
   {
+    id: "bkit",
+    icon: "⚡",
+    name: "bkit",
+    org: "bkitai",
+    badge: "추천",
+    description: "Claude Code를 위한 종합 Vibecoding 키트. PDCA 방법론, CTO Lead 에이전트 오케스트레이션, 9단계 개발 파이프라인, 30+ 전문 에이전트, 200+ 스킬을 제공합니다.",
+    repoUrl: "https://github.com/bkitai/bkit",
+    marketplace: "/plugin marketplace add bkitai/bkit",
+    cloneTarget: null,
+    cloneCmd: "git clone https://github.com/bkitai/bkit",
+    tags: ["PDCA", "멀티 에이전트", "Vibecoding", "200+ 스킬"],
+  },
+  {
     id: "plugins-for-claude-natives",
     icon: "🧩",
     name: "plugins-for-claude-natives",
@@ -69,24 +82,6 @@ const communityPlugins = [
 ];
 
 const featuredCreators = [
-  {
-    id: "bkit",
-    icon: "⚡",
-    name: "bkit",
-    creator: "bkit.ai",
-    badge: "추천",
-    description: "Claude Code를 위한 종합 Vibecoding 키트. PDCA 방법론, 멀티 에이전트 오케스트레이션, 9단계 개발 파이프라인을 제공하는 프로급 플러그인 생태계입니다.",
-    website: "https://www.bkit.ai/",
-    repoUrl: "https://github.com/bkitai/bkit",
-    marketplace: "/plugin marketplace add bkitai/bkit",
-    highlights: [
-      "PDCA 방법론 기반 개발 워크플로우",
-      "CTO Lead 에이전트로 팀 오케스트레이션",
-      "9단계 개발 파이프라인 (/development-pipeline)",
-      "30+ 전문 에이전트, 200+ 스킬",
-    ],
-    tags: ["PDCA", "멀티 에이전트", "Vibecoding", "개발 파이프라인"],
-  },
   {
     id: "cokacdir",
     icon: "📂",
@@ -162,16 +157,49 @@ export default function PluginsGuide() {
             <a href="#my-plugins" className="text-primary hover:underline">2. 내가 만든 플러그인</a>
             <a href="#cs_plugins" className="text-primary hover:underline pl-4">└ cs_plugins</a>
             <a href="#community-plugins" className="text-primary hover:underline">3. 커뮤니티 추천 플러그인</a>
+            <a href="#bkit" className="text-primary hover:underline pl-4">└ bkit</a>
             <a href="#plugins-for-claude-natives" className="text-primary hover:underline pl-4">└ plugins-for-claude-natives</a>
             <a href="#oh-my-claudecode" className="text-primary hover:underline pl-4">└ oh-my-claudecode</a>
             <a href="#kimoring-ai-skills" className="text-primary hover:underline pl-4">└ kimoring-ai-skills</a>
-            <a href="#featured-creators" className="text-primary hover:underline">4. 유명 크리에이터 추천 도구</a>
-            <a href="#bkit" className="text-primary hover:underline pl-4">└ bkit</a>
+            <a href="#featured-creators" className="text-primary hover:underline">4. 함께 쓰면 좋은 외부 도구</a>
             <a href="#cokacdir" className="text-primary hover:underline pl-4">└ cokacdir</a>
             <a href="#github-tools" className="text-primary hover:underline">5. 깃허브에서 클론해서 써보세요</a>
             <a href="#claude-team-monitor" className="text-primary hover:underline pl-4">└ claude-team-monitor</a>
             <a href="#portmanagement" className="text-primary hover:underline pl-4">└ portmanagement</a>
             <a href="#notes" className="text-primary hover:underline">6. 주의사항</a>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 플러그인이란? */}
+      <Card className="mb-8 border-primary/30 bg-primary/5">
+        <CardHeader>
+          <CardTitle className="text-base flex items-center gap-2">
+            <Package className="h-5 w-5 text-primary" />
+            플러그인이란?
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3 text-sm">
+          <p className="text-muted-foreground">
+            플러그인은 스킬(<code className="bg-muted px-1 rounded text-xs">.claude/skills/</code>)을 <strong>더 쉽게 공유하고 업데이트</strong>하기 위해 만들어진 개선된 형태입니다.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            <div className="bg-muted/50 rounded-md p-3">
+              <p className="font-medium text-xs mb-1.5">기존 방식 (스킬 직접 공유)</p>
+              <ul className="text-xs text-muted-foreground space-y-1">
+                <li>• 스킬 파일을 직접 복사해서 배포</li>
+                <li>• 업데이트 시 재복사 필요</li>
+                <li>• 버전 관리 어려움</li>
+              </ul>
+            </div>
+            <div className="bg-primary/10 rounded-md p-3">
+              <p className="font-medium text-xs mb-1.5 text-primary">플러그인 방식</p>
+              <ul className="text-xs text-muted-foreground space-y-1">
+                <li>• 명령어 하나로 설치</li>
+                <li>• <code className="bg-muted px-1 rounded">/plugin update</code>로 최신 버전 유지</li>
+                <li>• 마켓플레이스로 검색·발견 가능</li>
+              </ul>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -388,9 +416,9 @@ export default function PluginsGuide() {
       <section id="featured-creators" className="mb-12">
         <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
           <Trophy className="h-6 w-6 text-violet-500" />
-          4. 유명 크리에이터 추천 도구
+          4. 함께 쓰면 좋은 외부 도구
         </h2>
-        <p className="text-sm text-muted-foreground mb-6">Claude Code 생태계에서 주목받는 크리에이터들이 만든 도구와 플러그인입니다.</p>
+        <p className="text-sm text-muted-foreground mb-6">Claude Code 플러그인은 아니지만, 생태계를 더 풍부하게 활용할 수 있게 해주는 유용한 외부 도구들입니다.</p>
 
         {featuredCreators.map((item, index) => (
           <section key={item.id} id={item.id} className="mb-8">
