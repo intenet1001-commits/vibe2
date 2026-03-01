@@ -30,6 +30,14 @@ export default function TelegramBotGuide() {
         </div>
       </div>
 
+      {/* 출처 안내 */}
+      <div className="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-4 flex gap-3">
+        <AlertCircle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
+        <p className="text-sm text-amber-700 dark:text-amber-300">
+          이 가이드는 유튜브 채널 <strong>코드깎는노인</strong>의 강의를 참고하여 따라하기 쉽게 재정리한 내용입니다. 원본 콘텐츠 제작자의 노고에 감사드립니다. 보다 자세한 내용은 원본 강의를 참고하세요.
+        </p>
+      </div>
+
       {/* EC2 전제조건 알림 */}
       <div className="bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-8 flex gap-3">
         <Server className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
@@ -336,6 +344,19 @@ export default function TelegramBotGuide() {
           </CardContent>
         </Card>
       </section>
+
+      {/* 관련 페이지 */}
+      <div className="border border-muted rounded-lg p-4 flex items-center justify-between gap-4 text-sm">
+        <p className="text-muted-foreground">
+          Claude Code 생태계를 더 풍부하게 활용하고 싶다면 함께 쓰면 좋은 외부 도구들을 확인해보세요.
+        </p>
+        <a
+          href="/plugins-guide#featured-creators"
+          className="text-primary hover:underline shrink-0 font-medium"
+        >
+          외부 도구 모음 →
+        </a>
+      </div>
     </div>
   );
 }

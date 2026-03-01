@@ -499,6 +499,19 @@ export default function PluginsGuide() {
             {index < featuredCreators.length - 1 && <Separator className="mt-8 mb-8" />}
           </section>
         ))}
+
+        {/* 관련 내부 가이드 */}
+        <div className="border border-muted rounded-lg p-4 flex items-center justify-between gap-4 text-sm mt-6">
+          <p className="text-muted-foreground">
+            EC2에 Telegram 봇을 설정하는 방법도 가이드로 정리되어 있습니다.
+          </p>
+          <a
+            href="/telegram-bot-guide"
+            className="text-primary hover:underline shrink-0 font-medium"
+          >
+            Telegram Bot 가이드 →
+          </a>
+        </div>
       </section>
 
       <Separator className="mb-10" />
