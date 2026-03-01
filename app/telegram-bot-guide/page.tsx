@@ -34,7 +34,15 @@ export default function TelegramBotGuide() {
       <div className="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-4 flex gap-3">
         <AlertCircle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
         <p className="text-sm text-amber-700 dark:text-amber-300">
-          이 가이드는 유튜브 채널 <strong>코드깎는노인</strong>의 강의를 참고하여 따라하기 쉽게 재정리한 내용입니다. 원본 콘텐츠 제작자의 노고에 감사드립니다. 보다 자세한 내용은 원본 강의를 참고하세요.
+          이 가이드는 유튜브 채널 <strong>코드깎는노인</strong>의 강의를 참고하여 따라하기 쉽게 재정리한 내용입니다. 원본 콘텐츠 제작자의 노고에 감사드립니다.{" "}
+          <a
+            href="https://youtu.be/rGdyCUhmkqc?si=waYjCEozifmXkIFe"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline font-medium"
+          >
+            원본 영상 보기 →
+          </a>
         </p>
       </div>
 
