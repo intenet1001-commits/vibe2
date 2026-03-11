@@ -16,13 +16,11 @@ function AgentSlot({ index, sessionName }: { index: number; sessionName: string 
 
   const commands = isFirst
     ? [
-        { label: "터미널에서 tmux 세션 생성 (쉘 프롬프트로 바로 진입)", code: `tmux new-session -s ${sessionId}` },
-        { label: "Claude Code 실행", code: "claude" },
+        { label: "tmux 세션 생성 + Claude Code 실행 (탭 이름 자동 설정)", code: `printf '\\033]0;${sessionId}\\007' && tmux new-session -s ${sessionId} 'claude'` },
       ]
     : [
         { label: "새 iTerm2 탭 열기", code: "Cmd+T", note: "키보드 단축키" },
-        { label: "새 tmux 세션 생성", code: `tmux new-session -s ${sessionId}` },
-        { label: "Claude Code 실행", code: "claude" },
+        { label: "tmux 세션 생성 + Claude Code 실행 (탭 이름 자동 설정)", code: `printf '\\033]0;${sessionId}\\007' && tmux new-session -s ${sessionId} 'claude'` },
       ];
 
   const handleCopy = (code: string, i: number) => {
