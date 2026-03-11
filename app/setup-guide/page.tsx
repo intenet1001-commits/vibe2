@@ -42,7 +42,8 @@ export default function SetupGuide() {
           <div className="grid md:grid-cols-2 gap-3 text-sm">
             <a href="#version-check" className="text-primary hover:underline">버전 확인 명령어</a>
             <a href="#homebrew" className="text-primary hover:underline">Homebrew 설치 (macOS)</a>
-            <a href="#basic-setup" className="text-primary hover:underline">기본 개발 도구 설치</a>
+            <a href="#basic-setup" className="text-primary hover:underline">기본 개발 도구 설치 (Node.js · Git)</a>
+            <a href="#claude-code" className="text-primary hover:underline">Claude Code 설치</a>
             <a href="#github" className="text-primary hover:underline">GitHub 연동</a>
             <a href="#vercel" className="text-primary hover:underline">Vercel 연동</a>
             <a href="#supabase" className="text-primary hover:underline">Supabase 연동</a>
@@ -198,76 +199,7 @@ export default function SetupGuide() {
             </CardContent>
           </Card>
 
-          {/* Claude Code - macOS */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <span className="text-2xl">4</span> Claude Code 설치
-              </CardTitle>
-              <CardDescription>AI 기반 코딩 어시스턴트 CLI</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <h4 className="font-semibold mb-2">시스템 요구사항</h4>
-                <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                  <li>macOS 10.15 이상</li>
-                  <li>RAM 4GB 이상</li>
-                  <li>인터넷 연결 필수</li>
-                </ul>
-              </div>
-
-              <Separator />
-
-              <div>
-                <h4 className="font-semibold mb-2">방법 1: npm (권장)</h4>
-                <CodeBlock code="npm install -g @anthropic-ai/claude-code" />
-              </div>
-
-              <Separator />
-
-              <div>
-                <h4 className="font-semibold mb-2">설치 확인 및 사용</h4>
-                <CodeBlockMultiLine lines={[
-                  "claude --version",
-                  "",
-                  "# 프로젝트 폴더에서 실행",
-                  "cd your-project",
-                  "claude"
-                ]} />
-              </div>
-
-              <Separator />
-
-              <div>
-                <h4 className="font-semibold mb-2">💡 터미널 상태 표시줄 설정 (선택)</h4>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Claude Code 실행 중 터미널에 현재 모델, 브랜치 등 유용한 정보를 표시합니다.
-                </p>
-                <CodeBlock code="/statusline" />
-                <div className="bg-muted p-4 rounded-lg mt-3">
-                  <p className="text-xs text-muted-foreground mb-2">설정 후 터미널 표시 예시:</p>
-                  <div className="bg-background rounded p-3 font-mono text-sm">
-                    <span className="text-blue-500">🤖 Opus 4.5</span>
-                    <span className="text-muted-foreground mx-2">|</span>
-                    <span className="text-green-500">🌿 main</span>
-                    <span className="text-muted-foreground mx-2">|</span>
-                    <span className="text-orange-500">📁 ~/my-project</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mt-4">
-                <p className="text-sm font-semibold text-amber-700 dark:text-amber-300 mb-1">구독 필요</p>
-                <p className="text-sm text-amber-600 dark:text-amber-400">
-                  Claude Code를 사용하려면 Claude Pro 또는 Max 구독이 필요합니다 (월 $20~).{" "}
-                  <a href="https://claude.ai/upgrade" target="_blank" rel="noopener noreferrer" className="underline">
-                    구독 페이지 →
-                  </a>
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+          </TabsContent>
 
         {/* Windows Content */}
         <TabsContent value="windows" className="space-y-6">
@@ -297,11 +229,20 @@ export default function SetupGuide() {
               <Separator />
 
               <div>
-                <h4 className="font-semibold mb-2">방법 2: Chocolatey</h4>
+                <h4 className="font-semibold mb-2">방법 2: winget (Windows 기본 패키지 관리자)</h4>
+                <p className="text-sm text-muted-foreground mb-2">
+                  Windows 10/11에 기본 내장된 winget으로 한 줄 설치:
+                </p>
                 <CodeBlockMultiLine lines={[
-                  "# PowerShell 관리자 권한으로 실행",
-                  "choco install nodejs"
+                  "# PowerShell 또는 CMD에서 실행",
+                  "winget install OpenJS.NodeJS.LTS"
                 ]} />
+                <p className="text-sm text-muted-foreground mt-2">
+                  설치 완료 후 PowerShell을 재시작하고 확인:
+                </p>
+                <div className="mt-2">
+                  <CodeBlockMultiLine lines={["node --version", "npm --version"]} />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -316,15 +257,26 @@ export default function SetupGuide() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <h4 className="font-semibold mb-2">방법 1: Git for Windows (권장)</h4>
-                <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
-                  <li><a href="https://git-scm.com/download/win" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">https://git-scm.com/download/win</a> 접속</li>
-                  <li>64-bit Git for Windows Setup 다운로드</li>
-                  <li>기본 옵션으로 설치 진행</li>
-                </ol>
+                <h4 className="font-semibold mb-2">방법 1: winget (권장)</h4>
+                <p className="text-sm text-muted-foreground mb-2">
+                  Windows 10/11 기본 내장 패키지 관리자로 한 줄 설치:
+                </p>
+                <CodeBlock code="winget install Git.Git" />
+                <p className="text-sm text-muted-foreground mt-2">설치 완료 후 PowerShell을 재시작하고 확인:</p>
                 <div className="mt-2">
                   <CodeBlock code="git --version" />
                 </div>
+              </div>
+
+              <Separator />
+
+              <div>
+                <h4 className="font-semibold mb-2">방법 2: Git for Windows (공식 설치 파일)</h4>
+                <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
+                  <li><a href="https://git-scm.com/download/win" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">https://git-scm.com/download/win</a> 접속</li>
+                  <li>64-bit Git for Windows Setup 다운로드</li>
+                  <li>기본 옵션으로 설치 진행 (Git Bash도 함께 설치됨)</li>
+                </ol>
               </div>
 
               <Separator />
@@ -343,77 +295,86 @@ export default function SetupGuide() {
             </CardContent>
           </Card>
 
-          {/* Claude Code - Windows */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <span className="text-2xl">3</span> Claude Code 설치
-              </CardTitle>
-              <CardDescription>AI 기반 코딩 어시스턴트 CLI</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <h4 className="font-semibold mb-2">시스템 요구사항</h4>
-                <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                  <li>Windows 10 이상</li>
-                  <li>RAM 4GB 이상</li>
-                  <li>인터넷 연결 필수</li>
-                </ul>
-              </div>
-
-              <Separator />
-
-              <div>
-                <h4 className="font-semibold mb-2">npm으로 설치</h4>
-                <CodeBlock code="npm install -g @anthropic-ai/claude-code" />
-              </div>
-
-              <Separator />
-
-              <div>
-                <h4 className="font-semibold mb-2">설치 확인 및 사용</h4>
-                <CodeBlockMultiLine lines={[
-                  "claude --version",
-                  "",
-                  "# 프로젝트 폴더에서 실행",
-                  "cd your-project",
-                  "claude"
-                ]} />
-              </div>
-
-              <Separator />
-
-              <div>
-                <h4 className="font-semibold mb-2">💡 터미널 상태 표시줄 설정 (선택)</h4>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Claude Code 실행 중 터미널에 현재 모델, 브랜치 등 유용한 정보를 표시합니다.
-                </p>
-                <CodeBlock code="/statusline" />
-                <div className="bg-muted p-4 rounded-lg mt-3">
-                  <p className="text-xs text-muted-foreground mb-2">설정 후 터미널 표시 예시:</p>
-                  <div className="bg-background rounded p-3 font-mono text-sm">
-                    <span className="text-blue-500">🤖 Opus 4.5</span>
-                    <span className="text-muted-foreground mx-2">|</span>
-                    <span className="text-green-500">🌿 main</span>
-                    <span className="text-muted-foreground mx-2">|</span>
-                    <span className="text-orange-500">📁 ~/my-project</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mt-4">
-                <p className="text-sm font-semibold text-amber-700 dark:text-amber-300 mb-1">구독 필요</p>
-                <p className="text-sm text-amber-600 dark:text-amber-400">
-                  Claude Code를 사용하려면 Claude Pro 또는 Max 구독이 필요합니다 (월 $20~).{" "}
-                  <a href="https://claude.ai/upgrade" target="_blank" rel="noopener noreferrer" className="underline">
-                    구독 페이지 →
-                  </a>
-                </p>
-              </div>
-            </CardContent>
-          </Card>
         </TabsContent>
       </Tabs>
+
+      {/* Claude Code Installation - 공통 섹션 (macOS/Windows 동일) */}
+      <Card className="mt-6" id="claude-code">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <span className="text-2xl">✦</span> Claude Code 설치
+          </CardTitle>
+          <CardDescription>AI 기반 코딩 어시스턴트 CLI — macOS · Windows 공통</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <h4 className="font-semibold mb-2">시스템 요구사항</h4>
+            <div className="grid md:grid-cols-2 gap-3">
+              <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                <li>macOS 10.15 이상 또는 Windows 10 이상</li>
+                <li>Node.js 18+ (위 단계에서 설치 완료)</li>
+              </ul>
+              <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                <li>RAM 4GB 이상</li>
+                <li>인터넷 연결 필수</li>
+              </ul>
+            </div>
+          </div>
+
+          <Separator />
+
+          <div>
+            <h4 className="font-semibold mb-2">npm으로 설치 (권장)</h4>
+            <CodeBlock code="npm install -g @anthropic-ai/claude-code" />
+            <div className="bg-blue-50 dark:bg-blue-950 border-l-4 border-blue-500 p-3 text-xs text-blue-800 dark:text-blue-200 rounded-r mt-3">
+              💡 Windows에서 &quot;권한 거부&quot; 오류가 나면 PowerShell을 <strong>관리자 권한</strong>으로 실행 후 다시 시도하세요.
+            </div>
+          </div>
+
+          <Separator />
+
+          <div>
+            <h4 className="font-semibold mb-2">설치 확인 및 실행</h4>
+            <CodeBlockMultiLine lines={[
+              "claude --version",
+              "",
+              "# 프로젝트 폴더로 이동 후 실행",
+              "cd your-project",
+              "claude"
+            ]} />
+          </div>
+
+          <Separator />
+
+          <div>
+            <h4 className="font-semibold mb-2">💡 터미널 상태 표시줄 설정 (선택)</h4>
+            <p className="text-sm text-muted-foreground mb-3">
+              Claude Code 실행 중 현재 모델, 브랜치 등 유용한 정보를 터미널에 표시합니다.
+            </p>
+            <CodeBlock code="/statusline" />
+            <div className="bg-muted p-4 rounded-lg mt-3">
+              <p className="text-xs text-muted-foreground mb-2">설정 후 터미널 표시 예시:</p>
+              <div className="bg-background rounded p-3 font-mono text-sm">
+                <span className="text-blue-500">🤖 Opus 4.5</span>
+                <span className="text-muted-foreground mx-2">|</span>
+                <span className="text-green-500">🌿 main</span>
+                <span className="text-muted-foreground mx-2">|</span>
+                <span className="text-orange-500">📁 ~/my-project</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
+            <p className="text-sm font-semibold text-amber-700 dark:text-amber-300 mb-1">구독 필요</p>
+            <p className="text-sm text-amber-600 dark:text-amber-400">
+              Claude Code를 사용하려면 Claude Pro 또는 Max 구독이 필요합니다 (월 $20~).{" "}
+              <a href="https://claude.ai/upgrade" target="_blank" rel="noopener noreferrer" className="underline">
+                구독 페이지 →
+              </a>
+            </p>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* GitHub Integration Section */}
       <section className="mt-12" id="github">
