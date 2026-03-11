@@ -37,7 +37,7 @@ const quickStartSteps = [
     desc: "프로젝트 설정",
     plainDesc: "AI 코딩 도우미를 프로젝트에 연결합니다",
     tipLabel: "💡 이후 요청",
-    tip: "포트 9009, 실행.command 만들어줘",
+    tip: "포트 9001, 실행.command 만들어줘",
     commandType: "claude" as const,
   },
   {
@@ -131,12 +131,19 @@ function NextjsCard() {
 }
 
 function ClaudeCodeCard() {
-  const [port, setPort] = useState("9009");
+  const [os, setOs] = useState<"mac" | "win">("mac");
+  const [port, setPort] = useState("9001");
 
   const getTip = () => {
-    const portNum = port.trim() || "9009";
-    return `포트 ${portNum}, 실행.command 만들어줘`;
+    const portNum = port.trim() || "9001";
+    const file = os === "mac" ? "실행.command" : "실행.bat";
+    return `포트 ${portNum}, ${file} 만들어줘`;
   };
+
+  const btnCls = (active: boolean) =>
+    `text-xs px-2 py-1 rounded transition-colors ${
+      active ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80"
+    }`;
 
   return (
     <Card className="p-4 flex flex-col h-full">
@@ -147,13 +154,18 @@ function ClaudeCodeCard() {
       <CardDescription className="text-xs mb-1">프로젝트 설정</CardDescription>
       <p className="text-xs text-muted-foreground/70 mb-3">AI 코딩 도우미를 프로젝트에 연결합니다</p>
 
+      <div className="flex gap-1.5 mb-2">
+        <button onClick={() => setOs("mac")} className={btnCls(os === "mac")}>Mac</button>
+        <button onClick={() => setOs("win")} className={btnCls(os === "win")}>Windows</button>
+      </div>
+
       <div className="flex items-center gap-1.5 mb-2">
         <span className="text-xs text-muted-foreground">포트:</span>
         <input
           type="text"
           value={port}
           onChange={(e) => setPort(e.target.value)}
-          placeholder="9009"
+          placeholder="9001"
           aria-label="포트 번호"
           className="text-xs px-2 py-1 border rounded bg-background w-16 text-center"
         />
@@ -162,6 +174,7 @@ function ClaudeCodeCard() {
       <div className="mt-auto space-y-2">
         <CommandLabel type="claude" />
         <CodeBlock code="/init" className="text-xs" />
+        <p className="text-xs text-muted-foreground/60">↑ CLAUDE.md 생성 (선택)</p>
         <p className="text-xs text-muted-foreground">💡 이후 요청</p>
         <CommandLabel type="claude" />
         <CodeBlock code={getTip()} className="text-xs" />

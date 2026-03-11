@@ -38,6 +38,7 @@ const communityPlugins = [
     marketplace: "/plugin marketplace add bkitai/bkit",
     cloneTarget: null,
     cloneCmd: "git clone https://github.com/bkitai/bkit",
+    npxCmd: null,
     tags: ["PDCA", "멀티 에이전트", "Vibecoding", "200+ 스킬"],
   },
   {
@@ -51,6 +52,7 @@ const communityPlugins = [
     marketplace: "/plugin marketplace add team-attention/plugins-for-claude-natives",
     cloneTarget: "~/.claude/plugins/team-attention",
     cloneCmd: "git clone https://github.com/team-attention/plugins-for-claude-natives ~/.claude/plugins/team-attention",
+    npxCmd: null,
     tags: ["Agent Council", "YouTube", "Gmail", "KakaoTalk"],
   },
   {
@@ -64,6 +66,7 @@ const communityPlugins = [
     marketplace: "/plugin marketplace add https://github.com/Yeachan-Heo/oh-my-claudecode",
     cloneTarget: null,
     cloneCmd: "gh repo clone Yeachan-Heo/oh-my-claudecode",
+    npxCmd: null,
     tags: ["멀티 에이전트", "32+ 에이전트", "40+ 스킬", "오케스트레이션"],
   },
   {
@@ -77,7 +80,22 @@ const communityPlugins = [
     marketplace: null,
     cloneTarget: null,
     cloneCmd: "git clone https://github.com/codefactory-co/kimoring-ai-skills",
+    npxCmd: null,
     tags: ["스킬", "AI 워크플로우", "실전"],
+  },
+  {
+    id: "antigravity-awesome-skills",
+    icon: "🌌",
+    name: "antigravity-awesome-skills",
+    org: "sickn33",
+    badge: "커뮤니티",
+    description: "Claude Code를 위한 커뮤니티 스킬 모음. npx 명령어 하나로 실행하고 항상 최신 버전을 유지할 수 있습니다.",
+    repoUrl: "https://github.com/sickn33/antigravity-awesome-skills",
+    marketplace: null,
+    cloneTarget: null,
+    cloneCmd: null,
+    npxCmd: "npx antigravity-awesome-skills --version",
+    tags: ["스킬", "npx", "커뮤니티"],
   },
 ];
 
@@ -161,6 +179,7 @@ export default function PluginsGuide() {
             <a href="#plugins-for-claude-natives" className="text-primary hover:underline pl-4">└ plugins-for-claude-natives</a>
             <a href="#oh-my-claudecode" className="text-primary hover:underline pl-4">└ oh-my-claudecode</a>
             <a href="#kimoring-ai-skills" className="text-primary hover:underline pl-4">└ kimoring-ai-skills</a>
+            <a href="#antigravity-awesome-skills" className="text-primary hover:underline pl-4">└ antigravity-awesome-skills</a>
             <a href="#featured-creators" className="text-primary hover:underline">4. 함께 쓰면 좋은 외부 도구</a>
             <a href="#cokacdir" className="text-primary hover:underline pl-4">└ cokacdir</a>
             <a href="#github-tools" className="text-primary hover:underline">5. 깃허브에서 클론해서 써보세요</a>
@@ -379,6 +398,19 @@ export default function PluginsGuide() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
+                {plugin.npxCmd && (
+                  <div>
+                    <p className="text-sm font-medium mb-2 flex items-center gap-1">
+                      <CheckCircle2 className="h-4 w-4 text-green-500" />
+                      Method A: npx 실행 / 업데이트
+                    </p>
+                    <p className="text-xs text-muted-foreground mb-2">
+                      터미널에서 실행하면 자동으로 최신 버전을 가져옵니다.
+                    </p>
+                    <CodeBlock code={plugin.npxCmd} />
+                  </div>
+                )}
+
                 {plugin.marketplace && (
                   <div>
                     <p className="text-sm font-medium mb-2 flex items-center gap-1">
@@ -392,16 +424,18 @@ export default function PluginsGuide() {
                   </div>
                 )}
 
-                <div>
-                  <p className="text-sm font-medium mb-2 flex items-center gap-1">
-                    <CheckCircle2 className="h-4 w-4 text-blue-500" />
-                    Method {plugin.marketplace ? "B" : "A"}: git clone 설치
-                  </p>
-                  <p className="text-xs text-muted-foreground mb-2">
-                    터미널에서 실행하세요.
-                  </p>
-                  <CodeBlock code={plugin.cloneCmd} />
-                </div>
+                {plugin.cloneCmd && (
+                  <div>
+                    <p className="text-sm font-medium mb-2 flex items-center gap-1">
+                      <CheckCircle2 className="h-4 w-4 text-blue-500" />
+                      Method {plugin.marketplace || plugin.npxCmd ? "B" : "A"}: git clone 설치
+                    </p>
+                    <p className="text-xs text-muted-foreground mb-2">
+                      터미널에서 실행하세요.
+                    </p>
+                    <CodeBlock code={plugin.cloneCmd} />
+                  </div>
+                )}
               </CardContent>
             </Card>
 
@@ -409,6 +443,7 @@ export default function PluginsGuide() {
           </section>
         ))}
       </section>
+
 
       <Separator className="mb-10" />
 
