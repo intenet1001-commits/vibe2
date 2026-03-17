@@ -8,20 +8,27 @@ import { cn } from "@/lib/utils";
 
 const ORDINALS = ["첫 번째", "두 번째", "세 번째", "네 번째", "다섯 번째", "여섯 번째"];
 
-function AgentSlot({ index, sessionName, bypassPermissions }: { index: number; sessionName: string; bypassPermissions: boolean }) {
+function AgentSlot({ index, sessionName, bypassPermissions, worktreePath }: { index: number; sessionName: string; bypassPermissions: boolean; worktreePath: string }) {
   const [copied, setCopied] = useState<number | null>(null);
   const name = sessionName.trim() || "claude";
   const sessionId = index === 0 ? name : `${name}${index + 1}`;
   const isFirst = index === 0;
   const claudeCmd = bypassPermissions ? "claude --dangerously-skip-permissions" : "claude";
 
+  const agentWorktree = worktreePath.trim()
+    ? (index === 0 ? worktreePath.trim() : `${worktreePath.trim()}-${index + 1}`)
+    : "";
+  const tmuxCmd = agentWorktree
+    ? `printf '\\033]0;${sessionId}\\007' && tmux new-session -s ${sessionId} -c '${agentWorktree}' '${claudeCmd}'`
+    : `printf '\\033]0;${sessionId}\\007' && tmux new-session -s ${sessionId} '${claudeCmd}'`;
+
   const commands = isFirst
     ? [
-        { label: "tmux 세션 생성 + Claude Code 실행 (탭 이름 자동 설정)", code: `printf '\\033]0;${sessionId}\\007' && tmux new-session -s ${sessionId} '${claudeCmd}'` },
+        { label: "tmux 세션 생성 + Claude Code 실행 (탭 이름 자동 설정)", code: tmuxCmd },
       ]
     : [
         { label: "새 iTerm2 탭 열기", code: "Cmd+T", note: "키보드 단축키" },
-        { label: "tmux 세션 생성 + Claude Code 실행 (탭 이름 자동 설정)", code: `printf '\\033]0;${sessionId}\\007' && tmux new-session -s ${sessionId} '${claudeCmd}'` },
+        { label: "tmux 세션 생성 + Claude Code 실행 (탭 이름 자동 설정)", code: tmuxCmd },
       ];
 
   const handleCopy = (code: string, i: number) => {
@@ -39,8 +46,13 @@ function AgentSlot({ index, sessionName, bypassPermissions }: { index: number; s
         <code className={cn("ml-1 text-[10px] px-1.5 py-0.5 rounded font-mono", isFirst ? "bg-primary-foreground/20 text-primary-foreground" : "bg-background text-muted-foreground")}>
           세션: {sessionId}
         </code>
+        {agentWorktree && (
+          <code className={cn("text-[10px] px-1.5 py-0.5 rounded font-mono truncate max-w-[180px]", isFirst ? "bg-primary-foreground/20 text-primary-foreground" : "bg-background text-muted-foreground")}>
+            -w {agentWorktree}
+          </code>
+        )}
         {!isFirst && (
-          <span className="ml-auto text-[10px] bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded px-1.5 py-0.5">
+          <span className="ml-auto text-[10px] bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded px-1.5 py-0.5 shrink-0">
             Cmd+T 새 탭
           </span>
         )}
@@ -75,6 +87,7 @@ export function TmuxSessionBuilder() {
   const [sessionName, setSessionName] = useState("claude");
   const [agentCount, setAgentCount] = useState(2);
   const [bypassPermissions, setBypassPermissions] = useState(false);
+  const [worktreePath, setWorktreePath] = useState("");
 
   const inputClass = "text-xs px-2.5 py-1.5 border rounded bg-background w-full focus:outline-none focus:ring-1 focus:ring-ring font-mono";
 
@@ -174,12 +187,40 @@ export function TmuxSessionBuilder() {
 
         <Separator />
 
-        {/* ④ 명령어 목록 */}
+        {/* ④ 워크트리 경로 */}
         <div>
-          <p className="text-xs font-semibold mb-3">④ 각 에이전트별 실행 명령어</p>
+          <p className="text-xs font-semibold mb-1">④ 워크트리 경로 <span className="font-normal text-muted-foreground">(선택)</span></p>
+          <input
+            type="text"
+            value={worktreePath}
+            onChange={(e) => setWorktreePath(e.target.value)}
+            placeholder="/Users/me/project/worktrees/feat"
+            aria-label="워크트리 기본 경로"
+            className={inputClass}
+          />
+          {worktreePath.trim() ? (
+            <p className="text-[11px] text-muted-foreground mt-1">
+              에이전트마다 자동 경로 —{" "}
+              <code className="bg-muted px-1 rounded text-[10px]">{worktreePath.trim()}</code>,{" "}
+              <code className="bg-muted px-1 rounded text-[10px]">{worktreePath.trim()}-2</code>,{" "}
+              <code className="bg-muted px-1 rounded text-[10px]">{worktreePath.trim()}-3</code>…
+            </p>
+          ) : (
+            <p className="text-[11px] text-muted-foreground mt-1">
+              입력하면 tmux 세션 시작 디렉터리(<code className="bg-muted px-1 rounded text-[10px]">-c</code>)가 자동 설정됩니다.
+              git worktree 병렬 개발에 유용합니다.
+            </p>
+          )}
+        </div>
+
+        <Separator />
+
+        {/* ⑤ 명령어 목록 */}
+        <div>
+          <p className="text-xs font-semibold mb-3">⑤ 각 에이전트별 실행 명령어</p>
           <div className="space-y-3">
             {Array.from({ length: agentCount }, (_, i) => (
-              <AgentSlot key={i} index={i} sessionName={sessionName} bypassPermissions={bypassPermissions} />
+              <AgentSlot key={i} index={i} sessionName={sessionName} bypassPermissions={bypassPermissions} worktreePath={worktreePath} />
             ))}
           </div>
         </div>
