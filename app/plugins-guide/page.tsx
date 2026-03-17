@@ -75,13 +75,19 @@ const communityPlugins = [
     name: "kimoring-ai-skills",
     org: "codefactory-co",
     badge: "커뮤니티",
-    description: "codefactory(김기현)의 Claude Code 스킬 모음 (⭐ 206). verify-implementation · manage-skills · merge-worktree 3개의 스킬로 구성됩니다. 구현 후 검증 자동화, 세션 기반 스킬 유지보수, Git Worktree 스쿼시 머지를 각각 담당합니다.",
+    description: "코드팩토리(김기현)의 병렬 Worktree 워크플로우 스킬 모음 (⭐ 206). 기능 브랜치를 Git Worktree로 분리해 작업하고, 구현 검증 → 스킬 유지보수 → 스쿼시 머지까지 3단계 자동화 스킬을 제공합니다.",
     repoUrl: "https://github.com/codefactory-co/kimoring-ai-skills",
     marketplace: null,
     cloneTarget: "~/.claude/plugins/kimoring-ai-skills",
     cloneCmd: "git clone https://github.com/codefactory-co/kimoring-ai-skills ~/.claude/plugins/kimoring-ai-skills",
     npxCmd: null,
     tags: ["verify-implementation", "manage-skills", "merge-worktree", "⭐ 206"],
+    highlights: [
+      "🔍 /verify-implementation — 기능 구현 후·PR 전 실행. 등록된 모든 verify-* 스킬을 순차 실행해 통합 검증 보고서를 생성합니다. 이슈 발견 시 자동 수정 여부를 확인합니다.",
+      "🛠 /manage-skills — 세션에서 변경된 파일을 분석해 verify 스킬의 커버리지 누락을 탐지합니다. 새 스킬을 자동 생성하거나 기존 스킬을 업데이트하고 CLAUDE.md를 동기화합니다.",
+      "🔀 /merge-worktree [target-branch] — Worktree 브랜치 안에서 실행. 변경 내역을 분석해 포괄적인 커밋 메시지를 자동 작성하고, target 브랜치로 스쿼시 머지합니다.",
+      "💡 권장 워크플로우: git worktree로 기능 브랜치 분리 → 구현 → /verify-implementation → /manage-skills → /merge-worktree main",
+    ],
   },
   {
     id: "antigravity-awesome-skills",
@@ -398,6 +404,19 @@ export default function PluginsGuide() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
+                {"highlights" in plugin && plugin.highlights && (
+                  <div className="bg-muted/50 rounded-md p-3">
+                    <p className="font-medium text-xs mb-2 text-foreground">📖 스킬 사용 방법</p>
+                    <ul className="space-y-2">
+                      {(plugin.highlights as string[]).map((h, i) => (
+                        <li key={i} className="text-xs text-muted-foreground leading-relaxed">
+                          {h}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 {plugin.npxCmd && (
                   <div>
                     <p className="text-sm font-medium mb-2 flex items-center gap-1">
