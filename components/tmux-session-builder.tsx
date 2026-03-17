@@ -8,19 +8,20 @@ import { cn } from "@/lib/utils";
 
 const ORDINALS = ["첫 번째", "두 번째", "세 번째", "네 번째", "다섯 번째", "여섯 번째"];
 
-function AgentSlot({ index, sessionName }: { index: number; sessionName: string }) {
+function AgentSlot({ index, sessionName, bypassPermissions }: { index: number; sessionName: string; bypassPermissions: boolean }) {
   const [copied, setCopied] = useState<number | null>(null);
   const name = sessionName.trim() || "claude";
   const sessionId = index === 0 ? name : `${name}${index + 1}`;
   const isFirst = index === 0;
+  const claudeCmd = bypassPermissions ? "claude --dangerously-skip-permissions" : "claude";
 
   const commands = isFirst
     ? [
-        { label: "tmux 세션 생성 + Claude Code 실행 (탭 이름 자동 설정)", code: `printf '\\033]0;${sessionId}\\007' && tmux new-session -s ${sessionId} 'claude'` },
+        { label: "tmux 세션 생성 + Claude Code 실행 (탭 이름 자동 설정)", code: `printf '\\033]0;${sessionId}\\007' && tmux new-session -s ${sessionId} '${claudeCmd}'` },
       ]
     : [
         { label: "새 iTerm2 탭 열기", code: "Cmd+T", note: "키보드 단축키" },
-        { label: "tmux 세션 생성 + Claude Code 실행 (탭 이름 자동 설정)", code: `printf '\\033]0;${sessionId}\\007' && tmux new-session -s ${sessionId} 'claude'` },
+        { label: "tmux 세션 생성 + Claude Code 실행 (탭 이름 자동 설정)", code: `printf '\\033]0;${sessionId}\\007' && tmux new-session -s ${sessionId} '${claudeCmd}'` },
       ];
 
   const handleCopy = (code: string, i: number) => {
@@ -73,6 +74,7 @@ function AgentSlot({ index, sessionName }: { index: number; sessionName: string 
 export function TmuxSessionBuilder() {
   const [sessionName, setSessionName] = useState("claude");
   const [agentCount, setAgentCount] = useState(2);
+  const [bypassPermissions, setBypassPermissions] = useState(false);
 
   const inputClass = "text-xs px-2.5 py-1.5 border rounded bg-background w-full focus:outline-none focus:ring-1 focus:ring-ring font-mono";
 
@@ -130,12 +132,54 @@ export function TmuxSessionBuilder() {
 
         <Separator />
 
-        {/* ③ 명령어 목록 */}
+        {/* ③ 권한 자동 승인 */}
         <div>
-          <p className="text-xs font-semibold mb-3">③ 각 에이전트별 실행 명령어</p>
+          <p className="text-xs font-semibold mb-2">③ 권한 자동 승인 (선택)</p>
+          <label className="flex items-start gap-3 cursor-pointer group">
+            <div className="relative mt-0.5 shrink-0">
+              <input
+                type="checkbox"
+                checked={bypassPermissions}
+                onChange={(e) => setBypassPermissions(e.target.checked)}
+                className="sr-only"
+              />
+              <div className={cn(
+                "w-9 h-5 rounded-full transition-colors",
+                bypassPermissions ? "bg-orange-500" : "bg-muted border border-border"
+              )}>
+                <div className={cn(
+                  "absolute top-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform",
+                  bypassPermissions ? "translate-x-4" : "translate-x-0.5"
+                )} />
+              </div>
+            </div>
+            <div>
+              <p className="text-xs font-mono">
+                <code className={cn("px-1.5 py-0.5 rounded text-[11px]", bypassPermissions ? "bg-orange-100 dark:bg-orange-950 text-orange-700 dark:text-orange-300" : "bg-muted text-muted-foreground")}>
+                  --dangerously-skip-permissions
+                </code>
+              </p>
+              <p className="text-[11px] text-muted-foreground mt-1">
+                파일 읽기·쓰기·명령어 실행 등 모든 권한 확인을 건너뜁니다.
+                자동화 환경이나 신뢰할 수 있는 프로젝트에서만 사용하세요.
+              </p>
+            </div>
+          </label>
+          {bypassPermissions && (
+            <div className="mt-2 bg-orange-50 dark:bg-orange-950 border-l-4 border-orange-500 p-2.5 text-[11px] text-orange-800 dark:text-orange-200 rounded-r">
+              ⚠️ 신뢰할 수 없는 코드나 외부 저장소에서는 사용하지 마세요.
+            </div>
+          )}
+        </div>
+
+        <Separator />
+
+        {/* ④ 명령어 목록 */}
+        <div>
+          <p className="text-xs font-semibold mb-3">④ 각 에이전트별 실행 명령어</p>
           <div className="space-y-3">
             {Array.from({ length: agentCount }, (_, i) => (
-              <AgentSlot key={i} index={i} sessionName={sessionName} />
+              <AgentSlot key={i} index={i} sessionName={sessionName} bypassPermissions={bypassPermissions} />
             ))}
           </div>
         </div>
