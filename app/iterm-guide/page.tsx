@@ -7,23 +7,33 @@ import { PageNavigation } from "@/components/page-navigation";
 import { BackToTop } from "@/components/back-to-top";
 
 export const metadata: Metadata = {
-  title: "iTerm2 단축키 가이드 - AI 오케스트레이팅",
-  description: "생산성을 높이는 터미널 단축키 완벽 가이드. macOS iTerm2 설치부터 활용까지.",
+  title: "터미널 가이드 - AI 오케스트레이팅",
+  description: "생산성을 높이는 터미널 단축키 완벽 가이드. macOS iTerm2 및 Windows Terminal 설치부터 활용까지.",
 };
 
 export default function ITermGuidePage() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl">
       <div className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3">iTerm2 단축키 가이드</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-3">터미널 가이드</h1>
         <p className="text-lg md:text-xl text-muted-foreground">
           생산성을 높이는 터미널 단축키 완벽 가이드
         </p>
-        <div className="mt-4">
-          <Badge variant="secondary">macOS</Badge>
-          <Badge variant="secondary" className="ml-2">iTerm2</Badge>
+        <div className="mt-4 flex gap-2 flex-wrap">
+          <Badge variant="secondary">Mac</Badge>
+          <Badge variant="secondary">Windows</Badge>
+          <Badge variant="secondary">iTerm2</Badge>
+          <Badge variant="secondary">Windows Terminal</Badge>
         </div>
       </div>
+
+      <Tabs defaultValue="mac" className="w-full">
+        <TabsList className="mb-8">
+          <TabsTrigger value="mac">macOS (iTerm2)</TabsTrigger>
+          <TabsTrigger value="windows">Windows (Windows Terminal)</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="mac">
 
       {/* iTerm2 설치 가이드 */}
       <section className="mb-12">
@@ -968,6 +978,177 @@ export default function ITermGuidePage() {
           </TabsContent>
         </Tabs>
       </section>
+
+        </TabsContent>
+
+        <TabsContent value="windows">
+          {/* Windows Terminal 설치 가이드 */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold mb-6">Windows Terminal 설치하기</h2>
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <span className="text-2xl">1</span> winget으로 설치 (권장)
+                  </CardTitle>
+                  <CardDescription>Windows 10 2004 이상, Windows 11 기본 내장</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <p className="text-sm font-medium mb-2">PowerShell 또는 CMD에서:</p>
+                    <code className="block bg-muted p-3 rounded text-sm font-mono">
+                      winget install Microsoft.WindowsTerminal
+                    </code>
+                  </div>
+                  <Separator />
+                  <div>
+                    <p className="text-sm font-medium mb-2">설치 확인:</p>
+                    <code className="block bg-muted p-3 rounded text-sm font-mono">
+                      wt --version
+                    </code>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <span className="text-2xl">2</span> Microsoft Store에서 설치
+                  </CardTitle>
+                  <CardDescription>GUI 방식</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ol className="list-decimal list-inside space-y-3 text-sm">
+                    <li>Microsoft Store 앱 열기</li>
+                    <li>&quot;Windows Terminal&quot; 검색</li>
+                    <li>&quot;가져오기&quot; 클릭하여 설치</li>
+                  </ol>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
+
+          <Separator className="my-12" />
+
+          {/* Mac vs Windows 단축키 비교 */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold mb-6">Mac ↔ Windows 단축키 대응표</h2>
+            <Card>
+              <CardContent className="pt-6">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-left py-3 px-4 font-semibold">기능</th>
+                        <th className="text-left py-3 px-4 font-semibold">Mac (iTerm2)</th>
+                        <th className="text-left py-3 px-4 font-semibold">Windows (WT)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y">
+                      <tr>
+                        <td className="py-3 px-4">새 탭</td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Cmd+T</kbd></td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Ctrl+Shift+T</kbd></td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4">탭 전환</td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Cmd+[숫자]</kbd></td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Ctrl+Tab</kbd></td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4">창 분할 (세로)</td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Cmd+D</kbd></td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Alt+Shift++</kbd></td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4">창 분할 (가로)</td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Cmd+Shift+D</kbd></td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Alt+Shift+-</kbd></td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4">검색</td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Cmd+F</kbd></td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Ctrl+Shift+F</kbd></td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4">탭 닫기</td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Cmd+W</kbd></td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Ctrl+Shift+W</kbd></td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4">설정 열기</td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Cmd+,</kbd></td>
+                        <td className="py-3 px-4"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Ctrl+,</kbd></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+
+          <Separator className="my-12" />
+
+          {/* Windows Terminal 주요 기능 */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold mb-6">Windows Terminal 주요 기능</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>멀티 프로필</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    PowerShell, CMD, WSL2 Ubuntu 등 여러 셸을 탭으로 관리합니다.
+                    <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs mx-1">Ctrl+Shift+T</kbd>로
+                    새 탭을 열 때 프로필을 선택할 수 있습니다.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>창 분할 (Panes)</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    한 탭 안에서 화면을 분할하여 여러 셸을 동시에 볼 수 있습니다.
+                  </p>
+                  <div className="mt-3 space-y-1 text-xs">
+                    <p><kbd className="bg-muted px-1.5 py-0.5 rounded">Alt+Shift++</kbd> — 세로 분할</p>
+                    <p><kbd className="bg-muted px-1.5 py-0.5 rounded">Alt+Shift+-</kbd> — 가로 분할</p>
+                    <p><kbd className="bg-muted px-1.5 py-0.5 rounded">Alt+화살표</kbd> — 패널 간 이동</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>Claude Code in WSL2</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Agent Teams를 Windows에서 실행하려면 WSL2에서 tmux를 사용하세요.
+                  </p>
+                  <code className="block bg-muted p-2 rounded text-xs font-mono">
+                    wsl --install{"\n"}sudo apt install tmux{"\n"}npm i -g @anthropic-ai/claude-code
+                  </code>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>테마 & 커스터마이징</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Ctrl+,</kbd>로
+                    설정 UI를 열어 색상 테마, 글꼴, 투명도 등을 변경할 수 있습니다.
+                    JSON 파일 직접 편집도 지원합니다.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
+        </TabsContent>
+      </Tabs>
 
       <PageNavigation currentPath="/iterm-guide" />
       <BackToTop />

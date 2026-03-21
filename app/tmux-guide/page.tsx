@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock, CodeBlockMultiLine } from "@/components/ui/code-block";
 import { AlertCircle, CheckCircle2, Terminal } from "lucide-react";
 import { PageNavigation } from "@/components/page-navigation";
@@ -25,7 +26,8 @@ export default function TmuxGuide() {
         </p>
         <div className="flex gap-2 justify-center flex-wrap mt-6">
           <Badge variant="outline">Claude Code</Badge>
-          <Badge variant="outline">tmux</Badge>
+          <Badge variant="outline">tmux (Mac/Linux)</Badge>
+          <Badge variant="outline">WSL2 (Windows)</Badge>
           <Badge variant="outline">Agent Teams</Badge>
           <Badge variant="outline">병렬 처리</Badge>
         </div>
@@ -57,36 +59,92 @@ export default function TmuxGuide() {
           1. 사전 준비
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>tmux 설치 확인</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <CodeBlock code="tmux -V" />
-              <p className="text-sm text-muted-foreground">
-                설치되어 있지 않다면:
-              </p>
-              <CodeBlock code="brew install tmux" />
-            </CardContent>
-          </Card>
+        <Tabs defaultValue="mac">
+          <TabsList className="mb-4">
+            <TabsTrigger value="mac">macOS / Linux</TabsTrigger>
+            <TabsTrigger value="windows">Windows (WSL2)</TabsTrigger>
+          </TabsList>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>iTerm2 사용 권장</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Cmd+T</kbd>로
-                탭을 추가하며 에이전트별 터미널을 관리할 수 있습니다.
-              </p>
-              <div className="mt-3 bg-yellow-50 dark:bg-yellow-950 border-l-4 border-yellow-500 p-3 text-xs text-yellow-800 dark:text-yellow-200 rounded-r">
-                ⚠️ <code className="bg-yellow-100 dark:bg-yellow-900 px-1 rounded">tmux -CC</code> 옵션은
-                Command Menu를 띄워 입력이 막히므로 사용하지 마세요.
+          <TabsContent value="mac">
+            <div className="grid md:grid-cols-2 gap-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>tmux 설치 확인</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <CodeBlock code="tmux -V" />
+                  <p className="text-sm text-muted-foreground">
+                    설치되어 있지 않다면:
+                  </p>
+                  <CodeBlock code="brew install tmux" />
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>iTerm2 사용 권장</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs">Cmd+T</kbd>로
+                    탭을 추가하며 에이전트별 터미널을 관리할 수 있습니다.
+                  </p>
+                  <div className="mt-3 bg-yellow-50 dark:bg-yellow-950 border-l-4 border-yellow-500 p-3 text-xs text-yellow-800 dark:text-yellow-200 rounded-r">
+                    ⚠️ <code className="bg-yellow-100 dark:bg-yellow-900 px-1 rounded">tmux -CC</code> 옵션은
+                    Command Menu를 띄워 입력이 막히므로 사용하지 마세요.
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="windows">
+            <div className="space-y-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>1단계: WSL2 활성화</CardTitle>
+                  <CardDescription>PowerShell을 관리자 권한으로 실행 후 입력</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <CodeBlock code="wsl --install" />
+                  <p className="text-sm text-muted-foreground">
+                    재부팅 후 Ubuntu가 자동 설치됩니다. Windows 11은 기본 내장되어 있습니다.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>2단계: Ubuntu에서 tmux 설치</CardTitle>
+                  <CardDescription>WSL2 Ubuntu 터미널에서 실행</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <CodeBlock code="sudo apt update && sudo apt install tmux -y" />
+                  <CodeBlock code="tmux -V" />
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>3단계: Claude Code 설치 (WSL 내부)</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <CodeBlock code="npm install -g @anthropic-ai/claude-code" />
+                  <p className="text-sm text-muted-foreground">
+                    이후 tmux 사용법은 Mac/Linux와 동일합니다. Windows Terminal에서 WSL2 탭을 열어 사용하세요.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <div className="bg-blue-50 dark:bg-blue-950 border-l-4 border-blue-500 p-4 text-sm rounded-r">
+                <p className="text-blue-900 dark:text-blue-100">
+                  💡 Windows Terminal(<kbd className="bg-blue-100 dark:bg-blue-900 px-1 rounded text-xs">Ctrl+Shift+T</kbd>)에서
+                  Ubuntu 프로필로 새 탭을 열어 에이전트별 터미널을 관리하세요.
+                </p>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </TabsContent>
+        </Tabs>
       </section>
 
       <Separator className="my-12" />

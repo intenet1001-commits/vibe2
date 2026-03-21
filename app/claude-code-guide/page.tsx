@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock, CodeBlockMultiLine } from "@/components/ui/code-block";
 
 export const metadata: Metadata = {
@@ -139,21 +140,62 @@ export default function ClaudeCodeGuide() {
           <Separator />
 
           <div>
-            <h4 className="font-semibold mb-2">3. 터미널 기본 사용법</h4>
+            <h4 className="font-semibold mb-2">3. Git 설치</h4>
+            <p className="text-sm text-muted-foreground mb-3">
+              Claude Code는 코드 변경 내역을 Git으로 관리합니다. 반드시 사전에 설치해두세요.
+            </p>
+            <Tabs defaultValue="mac">
+              <TabsList className="mb-3">
+                <TabsTrigger value="mac">macOS</TabsTrigger>
+                <TabsTrigger value="windows">Windows</TabsTrigger>
+              </TabsList>
+              <TabsContent value="mac" className="space-y-3">
+                <p className="text-sm text-muted-foreground">Homebrew로 설치 (권장):</p>
+                <CodeBlock code="brew install git" />
+                <p className="text-sm text-muted-foreground">또는 Xcode Command Line Tools로 설치:</p>
+                <CodeBlock code="xcode-select --install" />
+                <p className="text-sm text-muted-foreground">설치 확인:</p>
+                <CodeBlock code="git --version" />
+              </TabsContent>
+              <TabsContent value="windows" className="space-y-3">
+                <p className="text-sm text-muted-foreground">winget으로 설치 (권장):</p>
+                <CodeBlock code="winget install Git.Git" />
+                <p className="text-sm text-muted-foreground">또는 공식 사이트에서 다운로드:</p>
+                <a
+                  href="https://git-scm.com/download/win"
+                  className="text-primary hover:underline text-sm block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  https://git-scm.com/download/win
+                </a>
+                <p className="text-sm text-muted-foreground mt-2">설치 후 PowerShell에서 확인:</p>
+                <CodeBlock code="git --version" />
+                <div className="bg-blue-50 dark:bg-blue-950 border-l-4 border-blue-500 p-3 text-xs text-blue-800 dark:text-blue-200 rounded-r">
+                  💡 설치 시 &quot;Git Bash&quot;도 함께 설치되어 Unix 명령어를 Windows에서 사용할 수 있습니다.
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          <Separator />
+
+          <div>
+            <h4 className="font-semibold mb-2">4. 터미널 기본 사용법</h4>
             <p className="text-sm text-muted-foreground mb-2">
               터미널에서 폴더 이동, 명령어 입력 등 기본적인 사용법을 알아두면 좋습니다.
             </p>
             <a href="/iterm-guide" className="text-primary hover:underline text-sm">
-              iTerm 가이드 바로가기 &rarr;
+              터미널 가이드 바로가기 &rarr;
             </a>
           </div>
 
           <Separator />
 
           <div>
-            <h4 className="font-semibold mb-2">4. Claude Code 설치</h4>
+            <h4 className="font-semibold mb-2">5. Claude Code 설치</h4>
             <p className="text-sm text-muted-foreground mb-2">
-              Node.js가 설치되어 있다면, 아래 명령어로 Claude Code를 설치합니다.
+              Node.js와 Git이 설치되어 있다면, 아래 명령어로 Claude Code를 설치합니다.
             </p>
             <CodeBlock code="npm install -g @anthropic-ai/claude-code" />
           </div>
