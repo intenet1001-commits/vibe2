@@ -9,7 +9,7 @@ import { PageNavigation } from "@/components/page-navigation";
 import { TmuxSessionBuilder } from "@/components/tmux-session-builder";
 
 export const metadata: Metadata = {
-  title: "Agent Teams 가이드 - AI 오케스트레이팅",
+  title: "Agent Teams 가이드 - AI 오케스트레이터",
   description: "여러 AI 에이전트를 팀으로 운영하는 방법. Claude Code Agent Teams 설정부터 실전까지.",
 };
 

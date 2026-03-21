@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock, CodeBlockMultiLine } from "@/components/ui/code-block";
 
 export const metadata: Metadata = {
-  title: "Claude Code 사용 가이드 - AI 오케스트레이팅",
+  title: "Claude Code 사용 가이드 - AI 오케스트레이터",
   description: "Claude Code로 대화하듯 코딩하기. 효과적인 프롬프트 작성법, 주요 명령어, 에러 대처법까지.",
 };
 

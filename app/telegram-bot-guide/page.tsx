@@ -7,7 +7,7 @@ import { AlertCircle, CheckCircle2, Plus, Server, Settings } from "lucide-react"
 import { TelegramBotBuilder } from "@/components/telegram-bot-builder";
 
 export const metadata: Metadata = {
-  title: "Telegram Bot EC2 설정 가이드 - AI 오케스트레이팅",
+  title: "Telegram Bot EC2 설정 가이드 - AI 오케스트레이터",
   description: "EC2 서버에 Telegram 봇을 처음부터 복수로 등록하거나, 기존 서버에 봇을 추가하는 방법을 단계별로 안내합니다.",
 };
 

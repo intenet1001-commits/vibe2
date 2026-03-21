@@ -18,17 +18,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI 오케스트레이팅 - 나만의 서비스 만들기",
+  title: "AI 오케스트레이터 - 나만의 서비스 만들기",
   description: "내가 필요한건 내가 만들어 쓰는 시대! Next.js, Tailwind, shadcn/ui로 세련되고 일관성있는 서비스 구축하기",
   openGraph: {
-    title: "AI 오케스트레이팅 - 나만의 서비스 만들기",
+    title: "AI 오케스트레이터 - 나만의 서비스 만들기",
     description: "내가 필요한건 내가 만들어 쓰는 시대! Next.js, Tailwind, shadcn/ui로 세련되고 일관성있는 서비스 구축하기",
     type: "website",
     locale: "ko_KR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI 오케스트레이팅 - 나만의 서비스 만들기",
+    title: "AI 오케스트레이터 - 나만의 서비스 만들기",
     description: "내가 필요한건 내가 만들어 쓰는 시대! Next.js, Tailwind, shadcn/ui로 세련되고 일관성있는 서비스 구축하기",
   },
 };
@@ -53,7 +53,7 @@ export default function RootLayout({
               <main id="main-content">{children}</main>
               <footer className="border-t mt-20">
                 <div className="container mx-auto px-4 py-8 text-center text-muted-foreground">
-                  © 2025 AI 오케스트레이팅. All rights reserved.
+                  © 2025 AI 오케스트레이터. All rights reserved.
                 </div>
               </footer>
               <Toaster />

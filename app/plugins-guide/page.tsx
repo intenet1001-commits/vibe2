@@ -7,7 +7,7 @@ import { AlertCircle, CheckCircle2, GitBranch, Package, Star, Trophy } from "luc
 import { PageNavigation } from "@/components/page-navigation";
 
 export const metadata: Metadata = {
-  title: "Claude Code 플러그인 모음 - AI 오케스트레이팅",
+  title: "Claude Code 플러그인 모음 - AI 오케스트레이터",
   description: "추천 Claude Code 플러그인 3종. git clone과 마켓플레이스 두 가지 방법으로 설치하세요.",
 };
 
@@ -140,7 +140,7 @@ const githubTools = [
   {
     id: "portmanagement",
     icon: "🔌",
-    name: "portmanagement",
+    name: "프로젝트관리프로그램",
     org: "intenet1001-commits",
     description: "다양한 로컬 웹앱을 만들 경우 포트관리기가 없으면 사실상 관리가 거의 불가합니다.",
     useCase: "여러 로컬 개발 서버의 포트를 한눈에 파악하고 관리할 수 있는 포트 관리 도구입니다.",
@@ -190,7 +190,7 @@ export default function PluginsGuide() {
             <a href="#cokacdir" className="text-primary hover:underline pl-4">└ cokacdir</a>
             <a href="#github-tools" className="text-primary hover:underline">5. 깃허브에서 클론해서 써보세요</a>
             <a href="#claude-team-monitor" className="text-primary hover:underline pl-4">└ claude-team-monitor</a>
-            <a href="#portmanagement" className="text-primary hover:underline pl-4">└ portmanagement</a>
+            <a href="#portmanagement" className="text-primary hover:underline pl-4">└ 프로젝트관리프로그램</a>
             <a href="#notes" className="text-primary hover:underline">6. 주의사항</a>
           </div>
         </CardContent>

@@ -7,7 +7,7 @@ import { PageNavigation } from "@/components/page-navigation";
 import { BackToTop } from "@/components/back-to-top";
 
 export const metadata: Metadata = {
-  title: "Git 완벽 가이드 - AI 오케스트레이팅",
+  title: "Git 완벽 가이드 - AI 오케스트레이터",
   description: "버전 관리 기초부터 실전 워크플로우까지. Git과 GitHub 사용법을 배워보세요.",
 };
 

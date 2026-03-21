@@ -8,7 +8,7 @@ import { PageNavigation } from "@/components/page-navigation";
 import { BackToTop } from "@/components/back-to-top";
 
 export const metadata: Metadata = {
-  title: "개발 환경 설치 가이드 - AI 오케스트레이팅",
+  title: "개발 환경 설치 가이드 - AI 오케스트레이터",
   description: "Node.js, Git, Claude Code 설치 및 GitHub/Vercel/Supabase 연동 가이드",
 };
 

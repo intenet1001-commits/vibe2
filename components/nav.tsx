@@ -31,7 +31,7 @@ export function Nav() {
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <Link href="/" className="text-lg md:text-xl font-bold whitespace-nowrap">
-            AI 오케스트레이팅
+            AI 오케스트레이터
           </Link>
 
           {/* Desktop Navigation */}

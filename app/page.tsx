@@ -101,7 +101,7 @@ export default function Home() {
             내가 필요한건 내가 만들어 쓰는 시대
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-6">
-            AI 오케스트레이팅으로 나만의 서비스 만들기
+            AI 오케스트레이터로 나만의 서비스 만들기
           </p>
           <div className="flex gap-2 justify-center flex-wrap">
             <Badge variant="secondary">Next.js</Badge>

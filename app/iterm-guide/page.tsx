@@ -7,7 +7,7 @@ import { PageNavigation } from "@/components/page-navigation";
 import { BackToTop } from "@/components/back-to-top";
 
 export const metadata: Metadata = {
-  title: "터미널 가이드 - AI 오케스트레이팅",
+  title: "터미널 가이드 - AI 오케스트레이터",
   description: "생산성을 높이는 터미널 단축키 완벽 가이드. macOS iTerm2 및 Windows Terminal 설치부터 활용까지.",
 };
 

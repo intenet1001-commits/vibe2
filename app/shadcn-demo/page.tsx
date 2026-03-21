@@ -7,7 +7,7 @@ import { PageNavigation } from "@/components/page-navigation";
 import { BackToTop } from "@/components/back-to-top";
 
 export const metadata: Metadata = {
-  title: "shadcn/ui 비교 데모 - AI 오케스트레이팅",
+  title: "shadcn/ui 비교 데모 - AI 오케스트레이터",
   description: "기본 HTML/CSS 스타일과 shadcn/ui의 차이를 직접 비교해보세요.",
 };
 
