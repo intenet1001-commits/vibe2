@@ -45,6 +45,10 @@ export default function ClaudeCodeGuide() {
             <a href="#practical-example" className="text-primary hover:underline">실전 예시: 로그인 페이지 만들기</a>
             <a href="#git-workflow" className="text-primary hover:underline">Claude Code + Git 워크플로우</a>
             <a href="#tips" className="text-primary hover:underline">유용한 팁</a>
+            <a href="#dangerous-permissions" className="text-primary hover:underline">위험 권한 설정 (--dangerously)</a>
+            <a href="#remote" className="text-primary hover:underline">원격 실행 (Remote Control)</a>
+            <a href="#channels" className="text-primary hover:underline">채널 기능 — Telegram 봇 연동</a>
+            <a href="#notebook" className="text-primary hover:underline">노트북 지원 (Notebook)</a>
           </div>
         </CardContent>
       </Card>
@@ -804,6 +808,265 @@ export default function ClaudeCodeGuide() {
               <code className="bg-muted px-1 rounded">/compact</code> 명령어로 대화를 요약하면
               컨텍스트를 유지하면서 새로운 대화처럼 이어갈 수 있습니다.
             </p>
+          </div>
+        </CardContent>
+      </Card>
+      {/* 위험 권한 설정 */}
+      <Card className="mb-8" id="dangerous-permissions">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            위험 권한 설정
+            <Badge variant="destructive" className="text-xs">주의</Badge>
+          </CardTitle>
+          <CardDescription>매번 뜨는 "허용하시겠습니까?" 확인창을 건너뛰고 자동 실행</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="bg-muted p-4 rounded-lg text-sm">
+            Claude Code는 파일 수정·명령 실행 전마다 승인을 요청합니다.
+            <code className="bg-background px-1 rounded mx-1">--dangerously-skip-permissions</code>를 붙이면
+            모든 확인을 건너뛰고 바로 실행됩니다.
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">복사해서 바로 사용</p>
+            <CodeBlockMultiLine lines={[
+              "# 기본 실행 (확인창 없음)",
+              "claude --dangerously-skip-permissions",
+              "",
+              "# 명령을 바로 실행하고 종료 (-p 플래그)",
+              'claude -p "TypeScript 에러 전부 수정해줘" --dangerously-skip-permissions',
+            ]} />
+          </div>
+
+          <div className="bg-yellow-50 dark:bg-yellow-950 border-l-4 border-yellow-500 p-3 text-sm text-yellow-800 dark:text-yellow-200 rounded-r">
+            ⚠️ 파일 삭제·덮어쓰기가 즉시 실행됩니다. 실행 전 <code className="bg-yellow-100 dark:bg-yellow-900 px-1 rounded">git commit</code>으로 백업하세요.
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 원격 실행 */}
+      <Card className="mb-8" id="remote">
+        <CardHeader>
+          <CardTitle>원격 실행 (Remote Control)</CardTitle>
+          <CardDescription>서버에 Claude Code를 띄워두고 어디서든 명령 전송</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="bg-muted p-4 rounded-lg text-sm">
+            EC2 같은 서버에 Claude Code를 HTTP 서버로 실행해두면,
+            로컬 터미널이나 스크립트에서 curl 한 줄로 명령을 보낼 수 있습니다.
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">① 서버에서 실행 (한 번만 설정)</p>
+            <CodeBlockMultiLine lines={[
+              "# 서버(EC2 등) SSH 접속 후",
+              "npm install -g @anthropic-ai/claude-code",
+              "export ANTHROPIC_API_KEY=여기에_API_KEY_입력",
+              "",
+              "# HTTP 서버로 실행 (8080 포트)",
+              "nohup claude --port 8080 --dangerously-skip-permissions > claude.log 2>&1 &",
+            ]} />
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">② 로컬에서 명령 전송 (복사해서 사용)</p>
+            <CodeBlockMultiLine lines={[
+              "# your-server.com 을 실제 서버 IP로 교체",
+              'curl -X POST http://your-server.com:8080/messages \\',
+              '  -H "Content-Type: application/json" \\',
+              '  -d \'{"message": "package.json 읽고 의존성 목록 알려줘"}\'',
+              "",
+              "# 또는 로컬 claude로 원격 서버에 직접 연결",
+              "claude --remote http://your-server.com:8080",
+            ]} />
+          </div>
+
+          <div className="bg-blue-50 dark:bg-blue-950 border-l-4 border-blue-500 p-3 text-sm text-blue-800 dark:text-blue-200 rounded-r">
+            💡 Telegram 봇과 연결하면 채팅으로 이 명령을 보낼 수 있습니다 → 아래 채널 기능 참고
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 채널 기능 */}
+      <Card className="mb-8" id="channels">
+        <CardHeader>
+          <CardTitle>채널 기능 — Telegram 봇 1:1 연동</CardTitle>
+          <CardDescription>내 Telegram 봇에게 메시지만 보내면 서버 Claude가 실행</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="bg-muted p-4 rounded-lg font-mono text-xs text-center leading-loose">
+            📱 내 Telegram → 🤖 내 봇 → 🖥️ 서버 bot.py → ⚡ Claude Code → 📱 결과 전송
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">① BotFather에서 봇 토큰 발급 (1분)</p>
+            <div className="bg-muted p-3 rounded-lg space-y-1 text-sm text-muted-foreground">
+              <p>1. Telegram 앱에서 <code className="bg-background px-1 rounded">@BotFather</code> 검색 → 대화 시작</p>
+              <p>2. <code className="bg-background px-1 rounded">/newbot</code> → 봇 이름 → username 입력 (끝에 <strong>bot</strong> 필수)</p>
+              <p>3. 발급된 <strong>Token</strong> 복사 (예: <code className="bg-background px-1 rounded">7123456789:AAF...</code>)</p>
+              <p>4. 내 Chat ID 확인: <code className="bg-background px-1 rounded">@userinfobot</code> 에게 아무 메시지 전송</p>
+            </div>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">② 서버에 패키지 설치 + 환경변수 설정</p>
+            <CodeBlockMultiLine lines={[
+              "pip3 install python-telegram-bot",
+              "",
+              "# ~/.bashrc 또는 ~/.zshrc 에 추가 후 source ~/.bashrc",
+              "export ANTHROPIC_API_KEY=여기에_Anthropic_API_키",
+              "export TELEGRAM_BOT_TOKEN=여기에_봇_토큰",
+              "export TELEGRAM_CHAT_ID=여기에_내_Chat_ID",
+              "export PROJECT_DIR=/var/www/내_프로젝트_경로",
+            ]} />
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">③ bot.py 파일 생성 후 그대로 복붙</p>
+            <CodeBlockMultiLine lines={[
+              "import subprocess, os",
+              "from telegram import Update",
+              "from telegram.ext import ApplicationBuilder, MessageHandler, filters",
+              "",
+              "ALLOWED_ID = int(os.environ['TELEGRAM_CHAT_ID'])",
+              "",
+              "async def handle(update: Update, context):",
+              "    if update.effective_chat.id != ALLOWED_ID:",
+              "        return",
+              "    result = subprocess.run(",
+              '        ["claude", "-p", update.message.text, "--dangerously-skip-permissions"],',
+              "        capture_output=True, text=True,",
+              "        cwd=os.environ['PROJECT_DIR']",
+              "    )",
+              "    reply = (result.stdout or result.stderr)[:4000]",
+              "    await update.message.reply_text(reply or '완료')",
+              "",
+              "app = ApplicationBuilder().token(os.environ['TELEGRAM_BOT_TOKEN']).build()",
+              "app.add_handler(MessageHandler(filters.TEXT, handle))",
+              "app.run_polling()",
+            ]} />
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">④ 실행</p>
+            <CodeBlockMultiLine lines={[
+              "# 테스트",
+              "python3 bot.py",
+              "",
+              "# 백그라운드 상시 실행",
+              "nohup python3 bot.py > bot.log 2>&1 &",
+            ]} />
+          </div>
+
+          <div className="bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 p-4 rounded-lg">
+            <p className="text-sm font-semibold text-green-800 dark:text-green-200 mb-2">완료! 이제 Telegram에서 내 봇에게 전송:</p>
+            <div className="space-y-1">
+              <p className="font-mono bg-green-100 dark:bg-green-900 px-2 py-1 rounded text-xs">"로그인 API 에러 고쳐줘"</p>
+              <p className="font-mono bg-green-100 dark:bg-green-900 px-2 py-1 rounded text-xs">"npm run build 하고 결과 알려줘"</p>
+              <p className="font-mono bg-green-100 dark:bg-green-900 px-2 py-1 rounded text-xs">"git status 알려줘"</p>
+            </div>
+          </div>
+
+          <div className="text-xs text-muted-foreground text-right">
+            systemd 등록, 보안 설정 포함 전체 가이드 →
+            <a href="/telegram-bot-guide" className="text-primary underline ml-1">Telegram 봇 가이드</a>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 노트북 지원 */}
+      <Card className="mb-8" id="notebook">
+        <CardHeader>
+          <CardTitle>노트북 지원 (Notebook)</CardTitle>
+          <CardDescription>Jupyter 노트북 (.ipynb) 파일 읽기 및 편집</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <p className="text-sm text-muted-foreground mb-3">
+              Claude Code는 Jupyter 노트북 파일(<code className="bg-muted px-1 rounded">.ipynb</code>)을 직접 읽고 편집할 수 있습니다.
+              데이터 분석, 머신러닝, 연구 코드 작업에 특히 유용합니다.
+            </p>
+          </div>
+
+          <Separator />
+
+          <div>
+            <h4 className="font-semibold mb-2">노트북 파일 작업 요청 예시</h4>
+            <div className="space-y-2">
+              <div className="border-l-4 border-primary pl-4 py-2">
+                <p className="text-sm">&quot;analysis.ipynb 노트북을 열어서 3번째 셀의 코드를 설명해줘&quot;</p>
+              </div>
+              <div className="border-l-4 border-primary pl-4 py-2">
+                <p className="text-sm">&quot;이 노트북에 pandas로 CSV 파일을 불러오는 새 셀을 추가해줘&quot;</p>
+              </div>
+              <div className="border-l-4 border-primary pl-4 py-2">
+                <p className="text-sm">&quot;노트북의 모든 셀을 실행하고 에러가 있으면 수정해줘&quot;</p>
+              </div>
+              <div className="border-l-4 border-primary pl-4 py-2">
+                <p className="text-sm">&quot;이 노트북을 Python 스크립트(.py)로 변환해줘&quot;</p>
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          <div>
+            <h4 className="font-semibold mb-2">노트북 셀 타입</h4>
+            <div className="grid md:grid-cols-3 gap-3">
+              <div className="bg-muted p-3 rounded-lg">
+                <p className="text-sm font-semibold mb-1">코드 셀</p>
+                <p className="text-xs text-muted-foreground">Python, R 등 실행 가능한 코드. Claude가 직접 수정·추가 가능</p>
+              </div>
+              <div className="bg-muted p-3 rounded-lg">
+                <p className="text-sm font-semibold mb-1">마크다운 셀</p>
+                <p className="text-xs text-muted-foreground">텍스트, 수식, 이미지 등 문서 내용. 설명 추가 요청 가능</p>
+              </div>
+              <div className="bg-muted p-3 rounded-lg">
+                <p className="text-sm font-semibold mb-1">출력 셀</p>
+                <p className="text-xs text-muted-foreground">코드 실행 결과. Claude가 결과를 읽고 분석 가능</p>
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          <div>
+            <h4 className="font-semibold mb-2">노트북 시작하기</h4>
+            <CodeBlockMultiLine lines={[
+              "# Jupyter 설치 (없는 경우)",
+              "pip install jupyter notebook",
+              "",
+              "# 새 노트북 파일 생성 요청",
+              '# Claude에게: "data_analysis.ipynb 노트북을 만들어줘.',
+              '#  pandas와 matplotlib을 사용하는 데이터 분석 템플릿으로 시작해줘"',
+              "",
+              "# 기존 노트북 작업",
+              "# Claude에게: \"existing_notebook.ipynb를 분석하고 개선점을 알려줘\""
+            ]} />
+          </div>
+
+          <div className="bg-muted p-4 rounded-lg">
+            <p className="text-sm font-semibold mb-2">노트북 활용 분야</p>
+            <div className="grid md:grid-cols-2 gap-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <span className="text-primary">▸</span> 데이터 분석 및 시각화
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-primary">▸</span> 머신러닝 모델 실험
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-primary">▸</span> 학술 연구 코드
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-primary">▸</span> API 프로토타이핑
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-primary">▸</span> 금융 데이터 분석
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-primary">▸</span> 교육용 코드 예제
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>
