@@ -848,41 +848,64 @@ export default function ClaudeCodeGuide() {
       <Card className="mb-8" id="remote">
         <CardHeader>
           <CardTitle>원격 실행 (Remote Control)</CardTitle>
-          <CardDescription>서버에 Claude Code를 띄워두고 어디서든 명령 전송</CardDescription>
+          <CardDescription>구독형(Pro/Max) 계정으로 원격 서버에서 Claude Code 사용하기</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-muted p-4 rounded-lg text-sm">
-            EC2 같은 서버에 Claude Code를 HTTP 서버로 실행해두면,
-            로컬 터미널이나 스크립트에서 curl 한 줄로 명령을 보낼 수 있습니다.
+            구독형은 API 키 없이 <strong>Anthropic 계정 로그인</strong>으로 인증합니다.
+            로컬에서 로그인한 인증 정보를 서버로 복사하면 서버에서도 바로 사용할 수 있습니다.
           </div>
 
           <div>
-            <p className="text-xs font-semibold text-muted-foreground mb-2">① 서버에서 실행 (한 번만 설정)</p>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">① 로컬에서 인증 완료 확인</p>
             <CodeBlockMultiLine lines={[
-              "# 서버(EC2 등) SSH 접속 후",
+              "# 로컬 터미널에서 — 이미 로그인되어 있으면 생략",
+              "claude",
+              "# 브라우저가 열리면 Anthropic 계정으로 로그인",
+            ]} />
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">② 인증 정보를 서버로 복사 (로컬에서 실행)</p>
+            <CodeBlockMultiLine lines={[
+              "# your-server.com 을 실제 서버 IP 또는 도메인으로 교체",
+              "scp -r ~/.claude user@your-server.com:~/.claude",
+            ]} />
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">③ 서버에 Claude Code 설치 후 바로 사용</p>
+            <CodeBlockMultiLine lines={[
+              "# 서버 SSH 접속",
+              "ssh user@your-server.com",
+              "",
+              "# Claude Code 설치",
               "npm install -g @anthropic-ai/claude-code",
-              "export ANTHROPIC_API_KEY=여기에_API_KEY_입력",
               "",
-              "# HTTP 서버로 실행 (8080 포트)",
-              "nohup claude --port 8080 --dangerously-skip-permissions > claude.log 2>&1 &",
+              "# 프로젝트 폴더에서 실행 (로그인 없이 바로 동작)",
+              "cd /my-project",
+              "claude --dangerously-skip-permissions",
             ]} />
           </div>
 
+          <Separator />
+
           <div>
-            <p className="text-xs font-semibold text-muted-foreground mb-2">② 로컬에서 명령 전송 (복사해서 사용)</p>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">서버에서 직접 인증하는 방법 (scp 없이)</p>
             <CodeBlockMultiLine lines={[
-              "# your-server.com 을 실제 서버 IP로 교체",
-              'curl -X POST http://your-server.com:8080/messages \\',
-              '  -H "Content-Type: application/json" \\',
-              '  -d \'{"message": "package.json 읽고 의존성 목록 알려줘"}\'',
-              "",
-              "# 또는 로컬 claude로 원격 서버에 직접 연결",
-              "claude --remote http://your-server.com:8080",
+              "# 서버에서 claude 실행하면 URL이 표시됨",
+              "claude",
+              "# → 'Please visit: https://claude.ai/...' 라는 URL 출력",
+              "# → 로컬 브라우저에서 해당 URL 열어서 로그인하면 완료",
             ]} />
+          </div>
+
+          <div className="bg-yellow-50 dark:bg-yellow-950 border-l-4 border-yellow-500 p-3 text-sm text-yellow-800 dark:text-yellow-200 rounded-r">
+            ⚠️ 인증 정보(<code className="bg-yellow-100 dark:bg-yellow-900 px-1 rounded">~/.claude</code>)에는 로그인 세션이 담겨 있습니다. 공용 서버에는 복사하지 마세요.
           </div>
 
           <div className="bg-blue-50 dark:bg-blue-950 border-l-4 border-blue-500 p-3 text-sm text-blue-800 dark:text-blue-200 rounded-r">
-            💡 Telegram 봇과 연결하면 채팅으로 이 명령을 보낼 수 있습니다 → 아래 채널 기능 참고
+            💡 Telegram 봇과 연결하면 채팅으로 서버 Claude를 원격 조종할 수 있습니다 → 아래 채널 기능 참고
           </div>
         </CardContent>
       </Card>
@@ -909,12 +932,16 @@ export default function ClaudeCodeGuide() {
           </div>
 
           <div>
-            <p className="text-xs font-semibold text-muted-foreground mb-2">② 서버에 패키지 설치 + 환경변수 설정</p>
+            <p className="text-xs font-semibold text-muted-foreground mb-2">② 서버에 패키지 설치 + 인증 + 환경변수 설정</p>
             <CodeBlockMultiLine lines={[
+              "# Claude Code + Python 패키지 설치",
+              "npm install -g @anthropic-ai/claude-code",
               "pip3 install python-telegram-bot",
               "",
+              "# 구독형 인증 — 로컬 인증 정보를 서버로 복사 (로컬에서 실행)",
+              "scp -r ~/.claude user@your-server.com:~/.claude",
+              "",
               "# ~/.bashrc 또는 ~/.zshrc 에 추가 후 source ~/.bashrc",
-              "export ANTHROPIC_API_KEY=여기에_Anthropic_API_키",
               "export TELEGRAM_BOT_TOKEN=여기에_봇_토큰",
               "export TELEGRAM_CHAT_ID=여기에_내_Chat_ID",
               "export PROJECT_DIR=/var/www/내_프로젝트_경로",
